@@ -1,0 +1,42 @@
+# Translation file
+
+#
+# Generic
+#
+
+# Module label 'ModuleFraisproName'
+ModuleFraisproName = Fraispro
+# Module description 'ModuleFraisproDesc'
+ModuleFraisproDesc = Fraispro description
+
+#
+# Admin page
+#
+FraisproSetup = Fraispro setup
+Settings = Settings
+FraisproSetupPage = Fraispro setup page
+NewSection=New section
+FRAISPRO_MYPARAM1 = My param 1
+FRAISPRO_MYPARAM1Tooltip = My param 1 tooltip
+FRAISPRO_MYPARAM2=My param 2
+FRAISPRO_MYPARAM2Tooltip=My param 2 tooltip
+
+
+#
+# About page
+#
+About = About
+FraisproAbout = About Fraispro
+FraisproAboutPage = Fraispro about page
+
+#
+# Sample page
+#
+FraisproArea = Home Fraispro
+MyPageName = My page name
+
+#
+# Sample widget
+#
+MyWidget = My widget
+MyWidgetDescription = My widget description
