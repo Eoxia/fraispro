@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+lang_map = uz: uz_UZ
+
+[fraispro.fraispro]
+file_filter = langs/<lang>/fraispro.lang
+source_file = langs/en_US/fraispro.lang
+source_lang = en_US
+type = MOZILLAPROPERTIES
