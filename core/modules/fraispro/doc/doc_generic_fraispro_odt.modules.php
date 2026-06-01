@@ -24,12 +24,12 @@
  */
 
 /**
- *	\file       htdocs/core/modules/fraispro/doc/doc_generic_myobject_odt.modules.php
+ *	\file       htdocs/core/modules/fraispro/doc/doc_generic_fraispro_odt.modules.php
  *	\ingroup    fraispro
  *	\brief      File of class to build ODT documents for myobjects
  */
 
-dol_include_once('/fraispro/core/modules/fraispro/modules_myobject.php');
+dol_include_once('/fraispro/core/modules/fraispro/modules_fraispro.php');
 require_once DOL_DOCUMENT_ROOT.'/product/class/product.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -40,7 +40,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/doc.lib.php';
 /**
  *	Class to build documents using ODF templates generator
  */
-class doc_generic_myobject_odt extends ModelePDFMyObject
+class doc_generic_fraispro_odt extends ModelePDFFraispro
 {
 	/**
 	 * Issuer
@@ -75,7 +75,7 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 		$this->db = $db;
 		$this->name = "ODT templates";
 		$this->description = $langs->trans("DocumentModelOdt");
-		$this->scandir = 'FRAISPRO_MYOBJECT_ADDON_PDF_ODT_PATH'; // Name of constant that is used to save list of directories to scan
+		$this->scandir = 'FRAISPRO_FRAISPRO_ADDON_PDF_ODT_PATH'; // Name of constant that is used to save list of directories to scan
 
 		// Page size for A4 format
 		$this->type = 'odt';
@@ -125,14 +125,14 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 
 		$form = new Form($this->db);
 
-		$odtPath = trim(getDolGlobalString('FRAISPRO_MYOBJECT_ADDON_PDF_ODT_PATH'));
+		$odtPath = trim(getDolGlobalString('FRAISPRO_FRAISPRO_ADDON_PDF_ODT_PATH'));
 
 		$texte = $this->description.".<br>\n";
 		$texte .= '<form action="'.$_SERVER["PHP_SELF"].'" method="POST" enctype="multipart/form-data">';
 		$texte .= '<input type="hidden" name="token" value="'.newToken().'">';
 		$texte .= '<input type="hidden" name="page_y" value="">';
 		$texte .= '<input type="hidden" name="action" value="setModuleOptions">';
-		$texte .= '<input type="hidden" name="param1" value="FRAISPRO_MYOBJECT_ADDON_PDF_ODT_PATH">';
+		$texte .= '<input type="hidden" name="param1" value="FRAISPRO_FRAISPRO_ADDON_PDF_ODT_PATH">';
 
 		$texte .= '<table class="nobordernopadding centpercent">';
 
@@ -178,7 +178,7 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 			// Show list of found files
 			foreach ($listoffiles as $file) {
 				$texte .= '- '.$file['name'].' <a href="'.DOL_URL_ROOT.'/document.php?modulepart=doctemplates&file=fraispro_myobject/'.urlencode(basename($file['name'])).'">'.img_picto('', 'listlight').'</a>';
-				$texte .= ' &nbsp; <a class="reposition" href="'.$_SERVER["PHP_SELF"].'?modulepart=doctemplates&keyforuploaddir=FRAISPRO_MYOBJECT_ADDON_PDF_ODT_PATH&action=deletefile&token='.newToken().'&file='.urlencode(basename($file['name'])).'">'.img_picto('', 'delete').'</a>';
+				$texte .= ' &nbsp; <a class="reposition" href="'.$_SERVER["PHP_SELF"].'?modulepart=doctemplates&keyforuploaddir=FRAISPRO_FRAISPRO_ADDON_PDF_ODT_PATH&action=deletefile&token='.newToken().'&file='.urlencode(basename($file['name'])).'">'.img_picto('', 'delete').'</a>';
 				$texte .= '<br>';
 			}
 			$texte .= '</div>';
@@ -196,7 +196,7 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 			$texte .= '<br></div></div>';
 		} else {
 			$texte .= '<br>';
-			$texte .= '<input type="hidden" name="value1" value="FRAISPRO_MYOBJECT_ADDON_PDF_ODT_PATH">';
+			$texte .= '<input type="hidden" name="value1" value="FRAISPRO_FRAISPRO_ADDON_PDF_ODT_PATH">';
 		}
 
 		// Add input to upload a new template file.
@@ -207,7 +207,7 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 			$texte .= '<input type="hidden" name="MAX_FILE_SIZE" value="'.($maxmin * 1024).'">';	// MAX_FILE_SIZE must precede the field type=file
 		}
 		$texte .= ' <input type="file" name="uploadfile">';
-		$texte .= '<input type="hidden" value="FRAISPRO_MYOBJECT_ADDON_PDF_ODT_PATH" name="keyforuploaddir">';
+		$texte .= '<input type="hidden" value="FRAISPRO_FRAISPRO_ADDON_PDF_ODT_PATH" name="keyforuploaddir">';
 		$texte .= '<input type="submit" class="button smallpaddingimp reposition" value="'.dol_escape_htmltag($langs->trans("Upload")).'" name="upload">';
 		$texte .= '</div>';
 
@@ -225,7 +225,7 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 	/**
 	 *  Function to build a document on disk using the generic odt module.
 	 *
-	 *  @param	MyObject	$object				Source object to generate document from
+	 *  @param	Fraispro	$object				Source object to generate document from
 	 *  @param	Translate	$outputlangs		Lang output object
 	 *  @param	string		$srctemplatepath	Full path of source filename for generator using a template file
 	 *  @param	int<0,1>	$hidedetails		Do not show line details
@@ -264,7 +264,7 @@ class doc_generic_myobject_odt extends ModelePDFMyObject
 			// If $object is id instead of object
 			if (!is_object($object)) {
 				$id = $object;
-				$object = new MyObject($this->db);
+				$object = new Fraispro($this->db);
 				$result = $object->fetch($id);
 				if ($result < 0) {
 					dol_print_error($this->db, $object->error);

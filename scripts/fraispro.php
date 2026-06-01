@@ -140,51 +140,51 @@ print 'Argument 2='.$argv[2]."\n";
 $db->begin();
 
 
-// Examples for manipulating class MyObject
-//dol_include_once("/fraispro/class/myobject.class.php");
-//$myobject=new MyObject($db);
+// Examples for manipulating class Fraispro
+//dol_include_once("/fraispro/class/fraispro.class.php");
+//$Fraispro=new Fraispro($db);
 
 // Example for inserting creating object in database
 /*
 dol_syslog($script_file." CREATE", LOG_DEBUG);
-$myobject->prop1='value_prop1';
-$myobject->prop2='value_prop2';
-$id=$myobject->create($user);
-if ($id < 0) { $error++; dol_print_error($db,$myobject->error); }
+$Fraispro->prop1='value_prop1';
+$Fraispro->prop2='value_prop2';
+$id=$Fraispro->create($user);
+if ($id < 0) { $error++; dol_print_error($db,$Fraispro->error); }
 else print "Object created with id=".$id."\n";
 */
 
 // Example for reading object from database
 /*
 dol_syslog($script_file." FETCH", LOG_DEBUG);
-$result=$myobject->fetch($id);
-if ($result < 0) { $error; dol_print_error($db,$myobject->error); }
+$result=$Fraispro->fetch($id);
+if ($result < 0) { $error; dol_print_error($db,$Fraispro->error); }
 else print "Object with id=".$id." loaded\n";
 */
 
-// Example for updating object in database ($myobject must have been loaded by a fetch before)
+// Example for updating object in database ($Fraispro must have been loaded by a fetch before)
 /*
 dol_syslog($script_file." UPDATE", LOG_DEBUG);
-$myobject->prop1='newvalue_prop1';
-$myobject->prop2='newvalue_prop2';
-$result=$myobject->update($user);
-if ($result < 0) { $error++; dol_print_error($db,$myobject->error); }
-else print "Object with id ".$myobject->id." updated\n";
+$Fraispro->prop1='newvalue_prop1';
+$Fraispro->prop2='newvalue_prop2';
+$result=$Fraispro->update($user);
+if ($result < 0) { $error++; dol_print_error($db,$Fraispro->error); }
+else print "Object with id ".$Fraispro->id." updated\n";
 */
 
-// Example for deleting object in database ($myobject must have been loaded by a fetch before)
+// Example for deleting object in database ($Fraispro must have been loaded by a fetch before)
 /*
 dol_syslog($script_file." DELETE", LOG_DEBUG);
-$result=$myobject->delete($user);
-if ($result < 0) { $error++; dol_print_error($db,$myobject->error); }
-else print "Object with id ".$myobject->id." deleted\n";
+$result=$Fraispro->delete($user);
+if ($result < 0) { $error++; dol_print_error($db,$Fraispro->error); }
+else print "Object with id ".$Fraispro->id." deleted\n";
 */
 
 
 // An example of a direct SQL read without using the fetch method
 /*
 $sql = "SELECT field1, field2";
-$sql.= " FROM ".$db->prefix()."myobject";
+$sql.= " FROM ".$db->prefix()."Fraispro";
 $sql.= " WHERE field3 = 'xxx'";
 $sql.= " ORDER BY field1 ASC";
 

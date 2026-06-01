@@ -23,18 +23,18 @@
  */
 
 /**
- * \file       htdocs/core/modules/fraispro/mod_myobject_advanced.php
+ * \file       htdocs/core/modules/fraispro/mod_fraispro_advanced.php
  * \ingroup    fraispro
- * \brief      File containing class for advanced numbering model of MyObject
+ * \brief      File containing class for advanced numbering model of Fraispro
  */
 
-dol_include_once('/fraispro/core/modules/fraispro/modules_myobject.php');
+dol_include_once('/fraispro/core/modules/fraispro/modules_fraispro.php');
 
 
 /**
- *	Class to manage the Advanced numbering rule for MyObject
+ *	Class to manage the Advanced numbering rule for Fraispro
  */
-class mod_myobject_advanced extends ModeleNumRefMyObject
+class mod_fraispro_advanced extends ModeleNumRefFraispro
 {
 	/**
 	 * Dolibarr version of the loaded document
@@ -74,13 +74,13 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 		$text .= '<input type="hidden" name="maskconst" value="FRAISPRO_MYOBJECT_ADVANCED_MASK">';
 		$text .= '<table class="nobordernopadding centpercent">';
 
-		$tooltip = $langs->trans("GenericMaskCodes", $langs->transnoentities("MyObject"), $langs->transnoentities("MyObject"));
+		$tooltip = $langs->trans("GenericMaskCodes", $langs->transnoentities("Fraispro"), $langs->transnoentities("Fraispro"));
 		$tooltip .= $langs->trans("GenericMaskCodes1");
 		$tooltip .= '<br>';
 		$tooltip .= $langs->trans("GenericMaskCodes2");
 		$tooltip .= '<br>';
 		$tooltip .= $langs->trans("GenericMaskCodes3");
-		$tooltip .= $langs->trans("GenericMaskCodes4a", $langs->transnoentities("MyObject"), $langs->transnoentities("MyObject"));
+		$tooltip .= $langs->trans("GenericMaskCodes4a", $langs->transnoentities("Fraispro"), $langs->transnoentities("Fraispro"));
 		$tooltip .= $langs->trans("GenericMaskCodes5");
 		$tooltip .= '<br>'.$langs->trans("GenericMaskCodes5b");
 
@@ -105,7 +105,7 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 	{
 		global $db, $langs;
 
-		$object = new MyObject($db);
+		$object = new Fraispro($db);
 		$object->initAsSpecimen();
 
 		/*$old_code_client = $mysoc->code_client;
@@ -127,7 +127,7 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 	/**
 	 * 	Return next free value
 	 *
-	 *  @param  MyObject		$object		Object we need next value for
+	 *  @param  Fraispro		$object		Object we need next value for
 	 *  @return string|int<-1,0>			Next value if OK, <=0 if KO
 	 */
 	public function getNextValue($object)

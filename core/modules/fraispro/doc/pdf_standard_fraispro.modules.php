@@ -34,7 +34,7 @@
  *  \brief      File of class to generate document from standard template
  */
 
-dol_include_once('/fraispro/core/modules/fraispro/modules_myobject.php');
+dol_include_once('/fraispro/core/modules/fraispro/modules_fraispro.php');
 require_once DOL_DOCUMENT_ROOT.'/product/class/product.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -44,7 +44,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/pdf.lib.php';
 /**
  *	Class to manage PDF template standard_myobject
  */
-class pdf_standard_myobject extends ModelePDFMyObject
+class pdf_standard_fraispro extends ModelePDFFraispro
 {
 	/**
 	 * @var DoliDB Database handler
@@ -159,7 +159,7 @@ class pdf_standard_myobject extends ModelePDFMyObject
 	/**
 	 *  Function to build and write pdf to disk
 	 *
-	 *  @param	MyObject	$object				Source object to generate document from
+	 *  @param	Fraispro	$object				Source object to generate document from
 	 *  @param	Translate	$outputlangs		Lang output object
 	 *  @param	string		$srctemplatepath	Full path of source filename for generator using a template file
 	 *  @param	int<0,1>	$hidedetails		Do not show line details
@@ -353,7 +353,7 @@ class pdf_standard_myobject extends ModelePDFMyObject
 					$info = array(
 						'Name' => $this->emetteur->name,
 						'Location' => getCountry($this->emetteur->country_code, ''),
-						'Reason' => 'MYOBJECT',
+						'Reason' => 'Fraispro',
 						'ContactInfo' => $this->emetteur->email
 					);
 					$pdf->setSignature($cert, $cert, $this->emetteur->name, '', 2, $info);
@@ -917,7 +917,7 @@ class pdf_standard_myobject extends ModelePDFMyObject
 	 *  Show top header of page.
 	 *
 	 *	@param	TCPDF|TCPDI	$pdf     		Object PDF
-	 *	@param	MyObject	$object     	Object to show
+	 *	@param	Fraispro	$object     	Object to show
 	 *	@param	int<0,1>	$showaddress    0=no, 1=yes
 	 *	@param	Translate	$outputlangs	Object lang for output
 	 *	@param	?Translate	$outputlangsbis	Object lang for output bis

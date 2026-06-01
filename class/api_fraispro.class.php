@@ -19,18 +19,18 @@
 
 use Luracast\Restler\RestException;
 
-dol_include_once('/fraispro/class/myobject.class.php');
+dol_include_once('/fraispro/class/fraispro.class.php');
 
 
 
 /**
  * \file    htdocs/modulebuilder/template/class/api_fraispro.class.php
  * \ingroup fraispro
- * \brief   File for API management of myobject.
+ * \brief   File for API management of Fraispro.
  */
 
 /**
- * API class for fraispro myobject
+ * API class for fraispro Fraispro
  *
  * @access protected
  * @class  DolibarrApiAccess {@requires user,external}
@@ -38,9 +38,9 @@ dol_include_once('/fraispro/class/myobject.class.php');
 class FraisproApi extends DolibarrApi
 {
 	/**
-	 * @var MyObject {@type MyObject}
+	 * @var Fraispro {@type Fraispro}
 	 */
-	public $myobject;
+	public $Fraispro;
 
 	/**
 	 * Constructor
@@ -51,23 +51,23 @@ class FraisproApi extends DolibarrApi
 	{
 		global $db;
 		$this->db = $db;
-		$this->myobject = new MyObject($this->db);
+		$this->Fraispro = new Fraispro($this->db);
 	}
 
 
-	/* BEGIN MODULEBUILDER API MYOBJECT */
+	/* BEGIN MODULEBUILDER API Fraispro */
 
 	/**
-	 * Get properties of a myobject object
+	 * Get properties of a Fraispro object
 	 *
-	 * Return an array with myobject information
+	 * Return an array with Fraispro information
 	 *
-	 * @param	int		$id				ID of myobject
+	 * @param	int		$id				ID of Fraispro
 	 * @return  Object					Object with cleaned properties
-	 * @phan-return	MyObject			Object with cleaned properties
-	 * @phpstan-return	MyObject			Object with cleaned properties
+	 * @phan-return	Fraispro			Object with cleaned properties
+	 * @phpstan-return	Fraispro			Object with cleaned properties
 	 *
-	 * @phan-return  MyObject
+	 * @phan-return  Fraispro
 	 *
 	 * @url	GET myobjects/{id}
 	 *
@@ -76,19 +76,19 @@ class FraisproApi extends DolibarrApi
 	 */
 	public function get($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'myobject', 'read')) {
+		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'Fraispro', 'read')) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('myobject', $id, 'fraispro_myobject')) {
+		if (!DolibarrApi::_checkAccessToResource('Fraispro', $id, 'fraispro_myobject')) {
 			throw new RestException(403, 'Access to instance id='.$id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
 		}
 
-		$result = $this->myobject->fetch($id);
+		$result = $this->Fraispro->fetch($id);
 		if (!$result) {
-			throw new RestException(404, 'MyObject not found');
+			throw new RestException(404, 'Fraispro not found');
 		}
 
-		return $this->_cleanObjectDatas($this->myobject);
+		return $this->_cleanObjectDatas($this->Fraispro);
 	}
 
 
@@ -103,9 +103,9 @@ class FraisproApi extends DolibarrApi
 	 * @param int			   $page				Page number
 	 * @param string           $sqlfilters          Other criteria to filter answers separated by a comma. Syntax example "(t.ref:like:'SO-%') and (t.date_creation:<:'20160101')"
 	 * @param string		   $properties			Restrict the data returned to these properties. Ignored if empty. Comma separated list of properties names
-	 * @return  array                               Array of MyObject objects
-	 * @phan-return array<int,MyObject>
-	 * @phpstan-return array<int,MyObject>
+	 * @return  array                               Array of Fraispro objects
+	 * @phan-return array<int,Fraispro>
+	 * @phpstan-return array<int,Fraispro>
 	 *
 	 * @throws RestException 403 Not allowed
 	 * @throws RestException 503 System error
@@ -115,9 +115,9 @@ class FraisproApi extends DolibarrApi
 	public function index($sortfield = "t.rowid", $sortorder = 'ASC', $limit = 100, $page = 0, $sqlfilters = '', $properties = '')
 	{
 		$obj_ret = array();
-		$tmpobject = new MyObject($this->db);
+		$tmpobject = new Fraispro($this->db);
 
-		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'myobject', 'read')) {
+		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'Fraispro', 'read')) {
 			throw new RestException(403);
 		}
 
@@ -176,26 +176,26 @@ class FraisproApi extends DolibarrApi
 			$num = $this->db->num_rows($result);
 			while ($i < $num) {
 				$obj = $this->db->fetch_object($result);
-				$tmp_object = new MyObject($this->db);
+				$tmp_object = new Fraispro($this->db);
 				if ($tmp_object->fetch($obj->rowid)) {
 					$obj_ret[] = $this->_filterObjectProperties($this->_cleanObjectDatas($tmp_object), $properties);
 				}
 				$i++;
 			}
 		} else {
-			throw new RestException(503, 'Error when retrieving myobject list: '.$this->db->lasterror());
+			throw new RestException(503, 'Error when retrieving Fraispro list: '.$this->db->lasterror());
 		}
 
 		return $obj_ret;
 	}
 
 	/**
-	 * Create myobject object
+	 * Create Fraispro object
 	 *
 	 * @param array $request_data   Request data
 	 * @phan-param ?array<string,mixed> $request_data
 	 * @phpstan-param ?array<string,mixed> $request_data
-	 * @return int  				ID of myobject
+	 * @return int  				ID of Fraispro
 	 *
 	 * @throws RestException 403 Not allowed
 	 * @throws RestException 500 System error
@@ -204,49 +204,49 @@ class FraisproApi extends DolibarrApi
 	 */
 	public function post($request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'myobject', 'write')) {
+		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'Fraispro', 'write')) {
 			throw new RestException(403);
 		}
 
 		// Check mandatory fields
-		$result = $this->_validateMyObject($request_data);
+		$result = $this->_validateFraispro($request_data);
 
 		foreach ($request_data as $field => $value) {
 			if ($field === 'caller') {
 				// Add a mention of caller so on trigger called after action, we can filter to avoid a loop if we try to sync back again with the caller @phan-suppress-next-line PhanTypeInvalidDimOffset
-				$this->myobject->context['caller'] = sanitizeVal((string) $request_data['caller'], 'aZ09');
+				$this->Fraispro->context['caller'] = sanitizeVal((string) $request_data['caller'], 'aZ09');
 				continue;
 			}
 
 			if ($field == 'array_options' && is_array($value)) {
 				foreach ($value as $index => $val) {
-					$this->myobject->array_options[$index] = $this->_checkValForAPI('extrafields', $val, $this->myobject);
+					$this->Fraispro->array_options[$index] = $this->_checkValForAPI('extrafields', $val, $this->Fraispro);
 				}
 				continue;
 			}
 
-			$this->myobject->$field = $this->_checkValForAPI((string) $field, $value, $this->myobject);
+			$this->Fraispro->$field = $this->_checkValForAPI((string) $field, $value, $this->Fraispro);
 		}
 
 		// Clean data
-		// $this->myobject->abc = sanitizeVal($this->myobject->abc, 'alphanohtml');
+		// $this->Fraispro->abc = sanitizeVal($this->Fraispro->abc, 'alphanohtml');
 
-		if ($this->myobject->create(DolibarrApiAccess::$user) < 0) {
-			throw new RestException(500, "Error creating MyObject", array_merge(array($this->myobject->error), $this->myobject->errors));
+		if ($this->Fraispro->create(DolibarrApiAccess::$user) < 0) {
+			throw new RestException(500, "Error creating Fraispro", array_merge(array($this->Fraispro->error), $this->Fraispro->errors));
 		}
-		return $this->myobject->id;
+		return $this->Fraispro->id;
 	}
 
 	/**
-	 * Update myobject
+	 * Update Fraispro
 	 *
-	 * @param 	int   		$id             Id of myobject to update
+	 * @param 	int   		$id             Id of Fraispro to update
 	 * @param 	array 		$request_data   Data
 	 * @phan-param ?array<string,mixed>	$request_data
 	 * @phpstan-param ?array<string,mixed>	$request_data
 	 * @return 	Object						Object after update
-	 * @phan-return MyObject
-	 * @phpstan-return MyObject
+	 * @phan-return Fraispro
+	 * @phpstan-return Fraispro
 	 *
 	 * @throws RestException 403 Not allowed
 	 * @throws RestException 404 Not found
@@ -256,16 +256,16 @@ class FraisproApi extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'myobject', 'write')) {
+		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'Fraispro', 'write')) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('myobject', $id, 'fraispro_myobject')) {
-			throw new RestException(403, 'Access to instance id='.$this->myobject->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DolibarrApi::_checkAccessToResource('Fraispro', $id, 'fraispro_myobject')) {
+			throw new RestException(403, 'Access to instance id='.$this->Fraispro->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
 		}
 
-		$result = $this->myobject->fetch($id);
+		$result = $this->Fraispro->fetch($id);
 		if (!$result) {
-			throw new RestException(404, 'MyObject not found');
+			throw new RestException(404, 'Fraispro not found');
 		}
 
 		foreach ($request_data as $field => $value) {
@@ -274,41 +274,41 @@ class FraisproApi extends DolibarrApi
 			}
 			if ($field === 'caller') {
 				// Add a mention of caller so on trigger called after action, we can filter to avoid a loop if we try to sync back again with the caller
-				$this->myobject->context['caller'] = sanitizeVal($request_data['caller'], 'aZ09');
+				$this->Fraispro->context['caller'] = sanitizeVal($request_data['caller'], 'aZ09');
 				continue;
 			}
 
 			if ($field == 'array_options' && is_array($value)) {
 				foreach ($value as $index => $val) {
-					$this->myobject->array_options[$index] = $this->_checkValForAPI('extrafields', $val, $this->myobject);
+					$this->Fraispro->array_options[$index] = $this->_checkValForAPI('extrafields', $val, $this->Fraispro);
 				}
 				continue;
 			}
 
 			if ($field == 'array_options' && is_array($value)) {
 				foreach ($value as $index => $val) {
-					$this->myobject->array_options[$index] = $this->_checkValForAPI($field, $val, $this->myobject);
+					$this->Fraispro->array_options[$index] = $this->_checkValForAPI($field, $val, $this->Fraispro);
 				}
 				continue;
 			}
 
-			$this->myobject->$field = $this->_checkValForAPI($field, $value, $this->myobject);
+			$this->Fraispro->$field = $this->_checkValForAPI($field, $value, $this->Fraispro);
 		}
 
 		// Clean data
-		// $this->myobject->abc = sanitizeVal($this->myobject->abc, 'alphanohtml');
+		// $this->Fraispro->abc = sanitizeVal($this->Fraispro->abc, 'alphanohtml');
 
-		if ($this->myobject->update(DolibarrApiAccess::$user, 0) > 0) {
+		if ($this->Fraispro->update(DolibarrApiAccess::$user, 0) > 0) {
 			return $this->get($id);
 		} else {
-			throw new RestException(500, $this->myobject->error);
+			throw new RestException(500, $this->Fraispro->error);
 		}
 	}
 
 	/**
-	 * Delete myobject
+	 * Delete Fraispro
 	 *
-	 * @param   int     $id   MyObject ID
+	 * @param   int     $id   Fraispro ID
 	 * @return  array
 	 * @phan-return array<string,array{code:int,message:string}>
 	 * @phpstan-return array<string,array{code:int,message:string}>
@@ -322,28 +322,28 @@ class FraisproApi extends DolibarrApi
 	 */
 	public function delete($id)
 	{
-		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'myobject', 'delete')) {
+		if (!DolibarrApiAccess::$user->hasRight('fraispro', 'Fraispro', 'delete')) {
 			throw new RestException(403);
 		}
-		if (!DolibarrApi::_checkAccessToResource('myobject', $id, 'fraispro_myobject')) {
-			throw new RestException(403, 'Access to instance id='.$this->myobject->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
+		if (!DolibarrApi::_checkAccessToResource('Fraispro', $id, 'fraispro_myobject')) {
+			throw new RestException(403, 'Access to instance id='.$this->Fraispro->id.' of object not allowed for login '.DolibarrApiAccess::$user->login);
 		}
 
-		$result = $this->myobject->fetch($id);
+		$result = $this->Fraispro->fetch($id);
 		if (!$result) {
-			throw new RestException(404, 'MyObject not found');
+			throw new RestException(404, 'Fraispro not found');
 		}
 
-		if ($this->myobject->delete(DolibarrApiAccess::$user) == 0) {
-			throw new RestException(409, 'Error when deleting MyObject : '.$this->myobject->error);
-		} elseif ($this->myobject->delete(DolibarrApiAccess::$user) < 0) {
-			throw new RestException(500, 'Error when deleting MyObject : '.$this->myobject->error);
+		if ($this->Fraispro->delete(DolibarrApiAccess::$user) == 0) {
+			throw new RestException(409, 'Error when deleting Fraispro : '.$this->Fraispro->error);
+		} elseif ($this->Fraispro->delete(DolibarrApiAccess::$user) < 0) {
+			throw new RestException(500, 'Error when deleting Fraispro : '.$this->Fraispro->error);
 		}
 
 		return array(
 			'success' => array(
 				'code' => 200,
-				'message' => 'MyObject deleted'
+				'message' => 'Fraispro deleted'
 			)
 		);
 	}
@@ -361,25 +361,25 @@ class FraisproApi extends DolibarrApi
 	 *
 	 * @throws	RestException
 	 */
-	private function _validateMyObject($data)
+	private function _validateFraispro($data)
 	{
 		if (!is_array($data)) {
 			$data = array();
 		}
-		$myobject = array();
-		foreach ($this->myobject->fields as $field => $propfield) {
+		$Fraispro = array();
+		foreach ($this->Fraispro->fields as $field => $propfield) {
 			if (in_array($field, array('rowid', 'entity', 'date_creation', 'tms', 'fk_user_creat')) || $propfield['notnull'] != 1) {
 				continue; // Not a mandatory field
 			}
 			if (!isset($data[$field])) {
 				throw new RestException(400, "$field field missing");
 			}
-			$myobject[$field] = $data[$field];
+			$Fraispro[$field] = $data[$field];
 		}
-		return $myobject;
+		return $Fraispro;
 	}
 
-	/* END MODULEBUILDER API MYOBJECT */
+	/* END MODULEBUILDER API Fraispro */
 
 
 

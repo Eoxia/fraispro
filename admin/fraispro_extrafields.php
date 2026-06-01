@@ -22,9 +22,9 @@
  */
 
 /**
- *      \file       htdocs/modulebuilder/template/admin/myobject_extrafields.php
+ *      \file       htdocs/modulebuilder/template/admin/fraispro_extrafields.php
  *		\ingroup    fraispro
- *		\brief      Page to setup extra fields of myobject
+ *		\brief      Page to setup extra fields of Fraispro
  */
 
 // Load Dolibarr environment
@@ -100,7 +100,7 @@ require DOL_DOCUMENT_ROOT.'/core/actions_extrafields.inc.php';
  * View
  */
 
-$textobject = $langs->transnoentitiesnoconv("MyObject");
+$textobject = $langs->transnoentitiesnoconv("Fraispro");
 
 $help_url = '';
 $page_name = "FraisproSetup";

@@ -10,7 +10,7 @@
  */
 
 include_once DOL_DOCUMENT_ROOT.'/core/modules/mailings/modules_mailings.php';
-dol_include_once("/fraispro/class/myobject.class.php");
+dol_include_once("/fraispro/class/fraispro.class.php");
 
 
 /**
@@ -93,7 +93,7 @@ class mailing_mailing_fraispro_selector1 extends MailingTargets
 	 */
 	public function url($id)
 	{
-		return '<a href="'.dol_buildpath('/fraispro/myobject_card.php', 1).'?id='.$id.'">'.img_object('', "generic").'</a>';
+		return '<a href="'.dol_buildpath('/fraispro/fraispro_card.php', 1).'?id='.$id.'">'.img_object('', "generic").'</a>';
 	}
 
 
@@ -138,7 +138,7 @@ class mailing_mailing_fraispro_selector1 extends MailingTargets
 						'other' => '', // (string) $obj->label,
 						'source_url' => $this->url($obj->id),
 						'source_id' => (int) $obj->id,
-						'source_type' => 'myobject@fraispro'
+						'source_type' => 'fraispro@fraispro'
 					);
 					$old = $obj->email;
 					$j++;

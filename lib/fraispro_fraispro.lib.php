@@ -16,18 +16,18 @@
  */
 
 /**
- * \file    htdocs/modulebuilder/template/lib/fraispro_myobject.lib.php
+ * \file    htdocs/modulebuilder/template/lib/fraispro_fraispro.lib.php
  * \ingroup fraispro
- * \brief   Library files with common functions for MyObject
+ * \brief   Library files with common functions for Fraispro
  */
 
 /**
- * Prepare array of tabs for MyObject
+ * Prepare array of tabs for Fraispro
  *
- * @param	MyObject	$object					MyObject
+ * @param	Fraispro	$object					Fraispro
  * @return 	array<array{string,string,string}>	Array of tabs
  */
-function myobjectPrepareHead($object)
+function fraisproPrepareHead($object)
 {
 	global $db, $langs, $conf;
 
@@ -41,13 +41,13 @@ function myobjectPrepareHead($object)
 	$h = 0;
 	$head = array();
 
-	$head[$h][0] = dol_buildpath("/fraispro/myobject_card.php", 1).'?id='.$object->id;
-	$head[$h][1] = $langs->trans("MyObject");
+	$head[$h][0] = dol_buildpath("/fraispro/fraispro_card.php", 1).'?id='.$object->id;
+	$head[$h][1] = $langs->trans("Fraispro");
 	$head[$h][2] = 'card';
 	$h++;
 
 	if ($showtabofpagecontact) {
-		$head[$h][0] = dol_buildpath("/fraispro/myobject_contact.php", 1).'?id='.$object->id;
+		$head[$h][0] = dol_buildpath("/fraispro/fraispro_contact.php", 1).'?id='.$object->id;
 		$head[$h][1] = $langs->trans("Contacts");
 		$head[$h][2] = 'contact';
 		$h++;
@@ -62,7 +62,7 @@ function myobjectPrepareHead($object)
 			if (!empty($object->note_public)) {
 				$nbNote++;
 			}
-			$head[$h][0] = dol_buildpath('/fraispro/myobject_note.php', 1).'?id='.$object->id;
+			$head[$h][0] = dol_buildpath('/fraispro/fraispro_note.php', 1).'?id='.$object->id;
 			$head[$h][1] = $langs->trans('Notes');
 			if ($nbNote > 0) {
 				$head[$h][1] .= (!getDolGlobalInt('MAIN_OPTIMIZEFORTEXTBROWSER') ? '<span class="badge marginleftonlyshort">'.$nbNote.'</span>' : '');
@@ -75,10 +75,10 @@ function myobjectPrepareHead($object)
 	if ($showtabofpagedocument) {
 		require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 		require_once DOL_DOCUMENT_ROOT.'/core/class/link.class.php';
-		$upload_dir = $conf->fraispro->dir_output."/myobject/".dol_sanitizeFileName($object->ref);
+		$upload_dir = $conf->fraispro->dir_output."/Fraispro/".dol_sanitizeFileName($object->ref);
 		$nbFiles = count(dol_dir_list($upload_dir, 'files', 0, '', '(\.meta|_preview.*\.png)$'));
 		$nbLinks = Link::count($db, $object->element, $object->id);
-		$head[$h][0] = dol_buildpath("/fraispro/myobject_document.php", 1).'?id='.$object->id;
+		$head[$h][0] = dol_buildpath("/fraispro/fraispro_document.php", 1).'?id='.$object->id;
 		$head[$h][1] = $langs->trans('Documents');
 		if (($nbFiles + $nbLinks) > 0) {
 			$head[$h][1] .= '<span class="badge marginleftonlyshort">'.($nbFiles + $nbLinks).'</span>';
@@ -88,7 +88,7 @@ function myobjectPrepareHead($object)
 	}
 
 	if ($showtabofpageagenda) {
-		$head[$h][0] = dol_buildpath("/fraispro/myobject_agenda.php", 1).'?id='.$object->id;
+		$head[$h][0] = dol_buildpath("/fraispro/fraispro_agenda.php", 1).'?id='.$object->id;
 		$head[$h][1] = $langs->trans("Events");
 		$head[$h][2] = 'agenda';
 		$h++;
@@ -102,9 +102,9 @@ function myobjectPrepareHead($object)
 	//$this->tabs = array(
 	//	'entity:-tabname:Title:@fraispro:/fraispro/mypage.php?id=__ID__'
 	//); // to remove a tab
-	complete_head_from_modules($conf, $langs, $object, $head, $h, 'myobject@fraispro');
+	complete_head_from_modules($conf, $langs, $object, $head, $h, 'fraispro@fraispro');
 
-	complete_head_from_modules($conf, $langs, $object, $head, $h, 'myobject@fraispro', 'remove');
+	complete_head_from_modules($conf, $langs, $object, $head, $h, 'fraispro@fraispro', 'remove');
 
 	return $head;
 }

@@ -20,17 +20,17 @@
  */
 
 /**
- *  \file       htdocs/core/modules/fraispro/mod_myobject_standard.php
+ *  \file       htdocs/core/modules/fraispro/mod_fraispro_standard.php
  *  \ingroup    fraispro
- *  \brief      File of class to manage MyObject numbering rules standard
+ *  \brief      File of class to manage Fraispro numbering rules standard
  */
-dol_include_once('/fraispro/core/modules/fraispro/modules_myobject.php');
+dol_include_once('/fraispro/core/modules/fraispro/modules_fraispro.php');
 
 
 /**
- *	Class to manage the Standard numbering rule for MyObject
+ *	Class to manage the Standard numbering rule for Fraispro
  */
-class mod_myobject_standard extends ModeleNumRefMyObject
+class mod_fraispro_standard extends ModeleNumRefFraispro
 {
 	/**
 	 * Dolibarr version of the loaded document
@@ -41,7 +41,7 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 	/**
 	 * @var string
 	 */
-	public $prefix = 'MYOBJECT';
+	public $prefix = 'Fraispro';
 
 	/**
 	 * @var string Error code (or message)
@@ -121,7 +121,7 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 	/**
 	 * 	Return next free value
 	 *
-	 *  @param  MyObject		$object		Object we need next value for
+	 *  @param  Fraispro		$object		Object we need next value for
 	 *  @return string|int<-1,0>			Next value if OK, <=0 if KO
 	 */
 	public function getNextValue($object)
@@ -148,7 +148,7 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 				$max = 0;
 			}
 		} else {
-			dol_syslog("mod_myobject_standard::getNextValue", LOG_DEBUG);
+			dol_syslog("mod_fraispro_standard::getNextValue", LOG_DEBUG);
 			return -1;
 		}
 
@@ -162,7 +162,7 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 			$num = sprintf("%04u", $max + 1);
 		}
 
-		dol_syslog("mod_myobject_standard::getNextValue return ".$this->prefix.$yymm."-".$num);
+		dol_syslog("mod_fraispro_standard::getNextValue return ".$this->prefix.$yymm."-".$num);
 		return $this->prefix.$yymm."-".$num;
 	}
 }

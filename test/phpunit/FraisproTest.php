@@ -18,7 +18,7 @@
  */
 
 /**
- * \file    test/phpunit/MyObjectTest.php
+ * \file    test/phpunit/FraisproTest.php
  * \ingroup fraispro
  * \brief   PHPUnit test for MyObject class.
  */
@@ -28,7 +28,7 @@ global $conf, $user, $langs, $db;
 
 //require_once 'PHPUnit/Autoload.php';
 require_once dirname(__FILE__).'/../../htdocs/master.inc.php';
-require_once dirname(__FILE__).'/../../htdocs/fraispro/class/myobject.class.php';
+require_once dirname(__FILE__).'/../../htdocs/fraispro/class/fraispro.class.php';
 
 if (empty($user->id)) {
 	print "Load permissions for admin user nb 1\n";
@@ -41,14 +41,14 @@ $langs->load("main");
 
 
 /**
- * Class MyObjectTest
+ * Class FraisproTest
  *
  * @backupGlobals disabled
  * @backupStaticAttributes enabled
  * @remarks	backupGlobals must be disabled to have db,conf,user and lang not erased.
  * @phan-file-suppress PhanCompatibleVoidTypePHP70
  */
-class MyObjectTest extends PHPUnit\Framework\TestCase  // @phan-suppress-current-line PhanUndeclaredExtendedClass
+class FraisproTest extends PHPUnit\Framework\TestCase  // @phan-suppress-current-line PhanUndeclaredExtendedClass
 {
 	/**
 	 * @var Conf Saved configuration object
@@ -165,12 +165,12 @@ class MyObjectTest extends PHPUnit\Framework\TestCase  // @phan-suppress-current
 	}
 
 	/**
-	 * testMyObjectCreate
+	 * testFraisproCreate
 	 *
 	 * @return int
 	 * @phan-suppress PhanUndeclaredMethod
 	 */
-	public function testMyObjectCreate()
+	public function testFraisproCreate()
 	{
 		global $conf, $user, $langs, $db;
 		$conf = $this->savconf;
@@ -178,7 +178,7 @@ class MyObjectTest extends PHPUnit\Framework\TestCase  // @phan-suppress-current
 		$langs = $this->savlangs;
 		$db = $this->savdb;
 
-		$localobject = new MyObject($this->savdb);
+		$localobject = new Fraispro($this->savdb);
 		$localobject->initAsSpecimen();
 		$result = $localobject->create($user);
 
@@ -189,16 +189,16 @@ class MyObjectTest extends PHPUnit\Framework\TestCase  // @phan-suppress-current
 	}
 
 	/**
-	 * testMyObjectDelete
+	 * testFraisproDelete
 	 *
 	 * @param	int		$id		Id of object
 	 * @return	int
 	 *
-	 * @depends	testMyObjectCreate
+	 * @depends	testFraisproCreate
 	 * The depends says test is run only if previous is ok
 	 * @phan-suppress PhanUndeclaredMethod
 	 */
-	public function testMyObjectDelete($id)
+	public function testFraisproDelete($id)
 	{
 		global $conf, $user, $langs, $db;
 		$conf = $this->savconf;
@@ -206,7 +206,7 @@ class MyObjectTest extends PHPUnit\Framework\TestCase  // @phan-suppress-current
 		$langs = $this->savlangs;
 		$db = $this->savdb;
 
-		$localobject = new MyObject($this->savdb);
+		$localobject = new Fraispro($this->savdb);
 		$result = $localobject->fetch($id);
 		$result = $localobject->delete($user);
 

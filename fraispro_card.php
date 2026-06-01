@@ -18,9 +18,9 @@
  */
 
 /**
- *    \file       htdocs/modulebuilder/template/myobject_card.php
+ *    \file       htdocs/modulebuilder/template/fraispro_card.php
  *    \ingroup    fraispro
- *    \brief      Page to create/edit/view myobject
+ *    \brief      Page to create/edit/view Fraispro
  */
 
 
@@ -84,8 +84,8 @@ if (!$res) {
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formprojet.class.php';
-dol_include_once('/fraispro/class/myobject.class.php');
-dol_include_once('/fraispro/lib/fraispro_myobject.lib.php');
+dol_include_once('/fraispro/class/fraispro.class.php');
+dol_include_once('/fraispro/lib/fraispro_fraispro.lib.php');
 
 /**
  * @var Conf $conf
@@ -114,7 +114,7 @@ $optioncss = GETPOST('optioncss', 'aZ'); // Option for the css output (always ''
 $dol_openinpopup = GETPOST('dol_openinpopup', 'aZ09');
 
 // Initialize a technical objects
-$object = new MyObject($db);
+$object = new Fraispro($db);
 $extrafields = new ExtraFields($db);
 $diroutputmassaction = $conf->fraispro->dir_output.'/temp/massgeneration/'.$user->id;
 $hookmanager->initHooks(array($object->element.'card', 'globalcard')); // Note that conf->hooks_modules contains array
@@ -146,11 +146,11 @@ include DOL_DOCUMENT_ROOT.'/core/actions_fetchobject.inc.php'; // Must be 'inclu
 // Set $enablepermissioncheck to 1 to enable a minimum low level of checks
 $enablepermissioncheck = getDolGlobalInt('FRAISPRO_ENABLE_PERMISSION_CHECK');
 if ($enablepermissioncheck) {
-	$permissiontoread = $user->hasRight('fraispro', 'myobject', 'read');
-	$permissiontoadd = $user->hasRight('fraispro', 'myobject', 'write'); // Used by the include of actions_addupdatedelete.inc.php and actions_lineupdown.inc.php
-	$permissiontodelete = $user->hasRight('fraispro', 'myobject', 'delete') || ($permissiontoadd && isset($object->status) && $object->status == $object::STATUS_DRAFT);
-	$permissionnote = $user->hasRight('fraispro', 'myobject', 'write'); // Used by the include of actions_setnotes.inc.php
-	$permissiondellink = $user->hasRight('fraispro', 'myobject', 'write'); // Used by the include of actions_dellink.inc.php
+	$permissiontoread = $user->hasRight('fraispro', 'Fraispro', 'read');
+	$permissiontoadd = $user->hasRight('fraispro', 'Fraispro', 'write'); // Used by the include of actions_addupdatedelete.inc.php and actions_lineupdown.inc.php
+	$permissiontodelete = $user->hasRight('fraispro', 'Fraispro', 'delete') || ($permissiontoadd && isset($object->status) && $object->status == $object::STATUS_DRAFT);
+	$permissionnote = $user->hasRight('fraispro', 'Fraispro', 'write'); // Used by the include of actions_setnotes.inc.php
+	$permissiondellink = $user->hasRight('fraispro', 'Fraispro', 'write'); // Used by the include of actions_dellink.inc.php
 } else {
 	$permissiontoread = 1;
 	$permissiontoadd = 1; // Used by the include of actions_addupdatedelete.inc.php and actions_lineupdown.inc.php
@@ -159,7 +159,7 @@ if ($enablepermissioncheck) {
 	$permissiondellink = 1;
 }
 
-$upload_dir = $conf->fraispro->multidir_output[isset($object->entity) ? $object->entity : 1].'/myobject';
+$upload_dir = $conf->fraispro->multidir_output[isset($object->entity) ? $object->entity : 1].'/Fraispro';
 
 // Security check (enable the most restrictive one)
 //if ($user->socid > 0) accessforbidden();
@@ -187,14 +187,14 @@ if ($reshook < 0) {
 }
 
 if (empty($reshook)) {
-	$backurlforlist = dol_buildpath('/fraispro/myobject_list.php', 1);
+	$backurlforlist = dol_buildpath('/fraispro/fraispro_list.php', 1);
 
 	if (empty($backtopage) || ($cancel && empty($id))) {
 		if (empty($backtopage) || ($cancel && strpos($backtopage, '__ID__'))) {
 			if (empty($id) && (($action != 'add' && $action != 'create') || $cancel)) {
 				$backtopage = $backurlforlist;
 			} else {
-				$backtopage = dol_buildpath('/fraispro/myobject_card.php', 1).'?id='.((!empty($id) && $id > 0) ? $id : '__ID__');
+				$backtopage = dol_buildpath('/fraispro/fraispro_card.php', 1).'?id='.((!empty($id) && $id > 0) ? $id : '__ID__');
 			}
 		}
 	}
@@ -225,8 +225,8 @@ if (empty($reshook)) {
 
 	// Actions to send emails
 	$triggersendname = 'FRAISPRO_MYOBJECT_SENTBYMAIL';
-	$autocopy = 'MAIN_MAIL_AUTOCOPY_MYOBJECT_TO';
-	$trackid = 'myobject'.$object->id;
+	$autocopy = 'MAIN_MAIL_AUTOCOPY_FRAISPRO_TO';
+	$trackid = 'Fraispro'.$object->id;
 	include DOL_DOCUMENT_ROOT.'/core/actions_sendmails.inc.php';
 }
 
@@ -241,10 +241,10 @@ $form = new Form($db);
 $formfile = new FormFile($db);
 $formproject = new FormProjets($db);
 
-$title = $langs->trans("MyObject")." - ".$langs->trans('Card');
+$title = $langs->trans("Fraispro")." - ".$langs->trans('Card');
 //$title = $object->ref." - ".$langs->trans('Card');
 if ($action == 'create') {
-	$title = $langs->trans("NewObject", $langs->transnoentitiesnoconv("MyObject"));
+	$title = $langs->trans("NewObject", $langs->transnoentitiesnoconv("Fraispro"));
 }
 $help_url = '';
 
@@ -311,7 +311,7 @@ if ($action == 'create') {
 
 // Part to edit record
 if (($id || $ref) && $action == 'edit') {
-	print load_fiche_titre($langs->trans("MyObject"), '', $object->picto);
+	print load_fiche_titre($langs->trans("Fraispro"), '', $object->picto);
 
 	print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
@@ -345,9 +345,9 @@ if (($id || $ref) && $action == 'edit') {
 
 // Part to show record
 if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'create'))) {
-	$head = myobjectPrepareHead($object);
+	$head = fraisproPrepareHead($object);
 
-	print dol_get_fiche_head($head, 'card', $langs->trans("MyObject"), -1, $object->picto, 0, '', '', 0, '', 1);
+	print dol_get_fiche_head($head, 'card', $langs->trans("Fraispro"), -1, $object->picto, 0, '', '', 0, '', 1);
 
 	$formconfirm = '';
 
@@ -405,7 +405,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 	// Object card
 	// ------------------------------------------------------------
-	$linkback = '<a href="'.dol_buildpath('/fraispro/myobject_list.php', 1).'?restore_lastsearch_values=1'.(!empty($socid) ? '&socid='.$socid : '').'">'.$langs->trans("BackToList").'</a>';
+	$linkback = '<a href="'.dol_buildpath('/fraispro/fraispro_list.php', 1).'?restore_lastsearch_values=1'.(!empty($socid) ? '&socid='.$socid : '').'">'.$langs->trans("BackToList").'</a>';
 
 	$morehtmlref = '<div class="refidno">';
 	/*
@@ -612,11 +612,11 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 			$urlsource = $_SERVER["PHP_SELF"]."?id=".$object->id;
 			$genallowed = $permissiontoread; // If you can read, you can build the PDF to read content
 			$delallowed = $permissiontoadd; // If you can create/edit, you can remove a file on card
-			print $formfile->showdocuments('fraispro:MyObject', $object->element.'/'.$objref, $filedir, $urlsource, $genallowed, $delallowed, $object->model_pdf, 1, 0, 0, 28, 0, '', '', '', $langs->defaultlang);
+			print $formfile->showdocuments('fraispro:Fraispro', $object->element.'/'.$objref, $filedir, $urlsource, $genallowed, $delallowed, $object->model_pdf, 1, 0, 0, 28, 0, '', '', '', $langs->defaultlang);
 		}
 
 		// Show links to link elements
-		$tmparray = $form->showLinkToObjectBlock($object, array(), array('myobject'), 1);
+		$tmparray = $form->showLinkToObjectBlock($object, array(), array('Fraispro'), 1);
 		if (is_array($tmparray)) {
 			$linktoelem = $tmparray['linktoelem'];
 			$htmltoenteralink = $tmparray['htmltoenteralink'];
@@ -631,7 +631,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 		$MAXEVENT = 10;
 
-		$morehtmlcenter = dolGetButtonTitle($langs->trans('SeeAll'), '', 'fa fa-bars imgforviewmode', dol_buildpath('/fraispro/myobject_agenda.php', 1).'?id='.$object->id);
+		$morehtmlcenter = dolGetButtonTitle($langs->trans('SeeAll'), '', 'fa fa-bars imgforviewmode', dol_buildpath('/fraispro/fraispro_agenda.php', 1).'?id='.$object->id);
 
 		$includeeventlist = 0;
 
@@ -651,10 +651,10 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 	}
 
 	// Presend form
-	$modelmail = 'myobject';
+	$modelmail = 'Fraispro';
 	$defaulttopic = 'InformationMessage';
 	$diroutput = $conf->fraispro->dir_output;
-	$trackid = 'myobject'.$object->id;
+	$trackid = 'Fraispro'.$object->id;
 
 	include DOL_DOCUMENT_ROOT.'/core/tpl/card_presend.tpl.php';
 }

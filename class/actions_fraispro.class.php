@@ -288,7 +288,7 @@ class ActionsFraispro extends CommonHookActions
 		$this->results['head'] = $head;
 
 		$arrayoftypes = array();
-		//$arrayoftypes['fraispro_myobject'] = array('label' => 'MyObject', 'picto'=>'myobject@fraispro', 'ObjectClassName' => 'MyObject', 'enabled' => isModEnabled('fraispro'), 'ClassPath' => "/fraispro/class/myobject.class.php", 'langs'=>'fraispro@fraispro')
+		//$arrayoftypes['fraispro_myobject'] = array('label' => 'Fraispro', 'picto'=>'fraispro@fraispro', 'ObjectClassName' => 'Fraispro', 'enabled' => isModEnabled('fraispro'), 'ClassPath' => "/fraispro/class/fraispro.class.php", 'langs'=>'fraispro@fraispro')
 
 		$this->results['arrayoftype'] = $arrayoftypes;
 
@@ -312,8 +312,8 @@ class ActionsFraispro extends CommonHookActions
 	{
 		global $user;
 
-		if ($parameters['features'] == 'myobject') {
-			if ($user->hasRight('fraispro', 'myobject', 'read')) {
+		if ($parameters['features'] == 'Fraispro') {
+			if ($user->hasRight('fraispro', 'Fraispro', 'read')) {
 				$this->results['result'] = 1;
 				return 1;
 			} else {
@@ -391,12 +391,12 @@ class ActionsFraispro extends CommonHookActions
 	 */
 	public function showLinkToObjectBlock($parameters, &$object, &$action, $hookmanager)
 	{
-		$myobject = new MyObject($object->db);
-		$this->results = array('myobject@fraispro' => array(
+		$Fraispro = new Fraispro($object->db);
+		$this->results = array('fraispro@fraispro' => array(
 			'enabled' => isModEnabled('fraispro'),
 			'perms' => 1,
 			'label' => 'LinkToMyObject',
-			'sql' => "SELECT t.rowid, t.ref, t.ref as 'name' FROM " . $this->db->prefix() . $myobject->table_element. " as t "),);
+			'sql' => "SELECT t.rowid, t.ref, t.ref as 'name' FROM " . $this->db->prefix() . $Fraispro->table_element. " as t "),);
 
 		return 1;
 	}

@@ -95,10 +95,10 @@ if (!empty($user->socid) && $user->socid > 0) {
 //if (!isModEnabled('fraispro')) {
 //	accessforbidden('Module not enabled');
 //}
-//if (! $user->hasRight('fraispro', 'myobject', 'read')) {
+//if (! $user->hasRight('fraispro', 'Fraispro', 'read')) {
 //	accessforbidden();
 //}
-//restrictedArea($user, 'fraispro', 0, 'fraispro_myobject', 'myobject', '', 'rowid');
+//restrictedArea($user, 'fraispro', 0, 'fraispro_myobject', 'Fraispro', '', 'rowid');
 //if (empty($user->admin)) {
 //	accessforbidden('Must be admin');
 //}
@@ -125,8 +125,8 @@ print load_fiche_titre($langs->trans("FraisproArea"), '', 'fraispro.png@fraispro
 print '<div class="fichecenter"><div class="fichethirdleft">';
 
 
-/* BEGIN MODULEBUILDER DRAFT MYOBJECT
-// Draft MyObject
+/* BEGIN MODULEBUILDER DRAFT Fraispro
+// Draft Fraispro
 if (isModEnabled('fraispro') && $user->hasRight('fraispro', 'read')) {
 	$langs->load("orders");
 
@@ -159,14 +159,14 @@ if (isModEnabled('fraispro') && $user->hasRight('fraispro', 'read')) {
 				$obj = $db->fetch_object($resql);
 				print '<tr class="oddeven"><td class="nowrap">';
 
-				$myobjectstatic->id=$obj->rowid;
-				$myobjectstatic->ref=$obj->ref;
-				$myobjectstatic->ref_client=$obj->ref_client;
-				$myobjectstatic->total_ht = $obj->total_ht;
-				$myobjectstatic->total_tva = $obj->total_tva;
-				$myobjectstatic->total_ttc = $obj->total_ttc;
+				$fraisprostatic->id=$obj->rowid;
+				$fraisprostatic->ref=$obj->ref;
+				$fraisprostatic->ref_client=$obj->ref_client;
+				$fraisprostatic->total_ht = $obj->total_ht;
+				$fraisprostatic->total_tva = $obj->total_tva;
+				$fraisprostatic->total_ttc = $obj->total_ttc;
 
-				print $myobjectstatic->getNomUrl(1);
+				print $fraisprostatic->getNomUrl(1);
 				print '</td>';
 				print '<td class="nowrap">';
 				print '</td>';
@@ -194,18 +194,18 @@ if (isModEnabled('fraispro') && $user->hasRight('fraispro', 'read')) {
 		dol_print_error($db);
 	}
 }
-END MODULEBUILDER DRAFT MYOBJECT */
+END MODULEBUILDER DRAFT Fraispro */
 
 
 print '</div><div class="fichetwothirdright">';
 
 
-/* BEGIN MODULEBUILDER LASTMODIFIED MYOBJECT
-// Last modified myobject
+/* BEGIN MODULEBUILDER LASTMODIFIED Fraispro
+// Last modified Fraispro
 if (isModEnabled('fraispro') && $user->hasRight('fraispro', 'read')) {
 	$sql = "SELECT s.rowid, s.ref, s.label, s.date_creation, s.tms";
 	$sql.= " FROM ".$db->prefix()."fraispro_myobject as s";
-	$sql.= " WHERE s.entity IN (".getEntity($myobjectstatic->element).")";
+	$sql.= " WHERE s.entity IN (".getEntity($fraisprostatic->element).")";
 	//if ($socid)	$sql.= " AND s.rowid = $socid";
 	$sql .= " ORDER BY s.tms DESC";
 	$sql .= $db->plimit($max, 0);
@@ -229,13 +229,13 @@ if (isModEnabled('fraispro') && $user->hasRight('fraispro', 'read')) {
 			{
 				$objp = $db->fetch_object($resql);
 
-				$myobjectstatic->id=$objp->rowid;
-				$myobjectstatic->ref=$objp->ref;
-				$myobjectstatic->label=$objp->label;
-				$myobjectstatic->status = $objp->status;
+				$fraisprostatic->id=$objp->rowid;
+				$fraisprostatic->ref=$objp->ref;
+				$fraisprostatic->label=$objp->label;
+				$fraisprostatic->status = $objp->status;
 
 				print '<tr class="oddeven">';
-				print '<td class="nowrap">'.$myobjectstatic->getNomUrl(1).'</td>';
+				print '<td class="nowrap">'.$fraisprostatic->getNomUrl(1).'</td>';
 				print '<td class="right nowrap">';
 				print "</td>";
 				print '<td class="right nowrap">'.dol_print_date($db->jdate($objp->tms), 'day')."</td>";

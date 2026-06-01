@@ -45,7 +45,7 @@ function fraisproAdminPrepareHead()
 	$h++;
 
 	/*
-	$head[$h][0] = dol_buildpath("/fraispro/admin/myobject_extrafields.php", 1);
+	$head[$h][0] = dol_buildpath("/fraispro/admin/fraispro_extrafields.php", 1);
 	$head[$h][1] = $langs->trans("ExtraFields");
 	$nbExtrafields = (isset($extrafields->attributes['myobject']['label']) && is_countable($extrafields->attributes['myobject']['label'])) ? count($extrafields->attributes['myobject']['label']) : 0;
 	if ($nbExtrafields > 0) {
@@ -54,7 +54,7 @@ function fraisproAdminPrepareHead()
 	$head[$h][2] = 'myobject_extrafields';
 	$h++;
 
-	$head[$h][0] = dol_buildpath("/fraispro/admin/myobjectline_extrafields.php", 1);
+	$head[$h][0] = dol_buildpath("/fraispro/admin/fraisprodet_extrafields.php", 1);
 	$head[$h][1] = $langs->trans("ExtraFieldsLines");
 	$nbExtrafields = (isset($extrafields->attributes['myobjectline']['label']) && is_countable($extrafields->attributes['myobjectline']['label'])) ? count($extrafields->attributes['myobject']['label']) : 0;
 	if ($nbExtrafields > 0) {

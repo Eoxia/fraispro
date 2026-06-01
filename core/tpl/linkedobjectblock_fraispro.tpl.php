@@ -30,7 +30,7 @@ if (empty($conf) || !is_object($conf)) {
 }
 
 
-print "<!-- BEGIN PHP TEMPLATE fraispro/core/tpl/linkedobjectblock_myobject.tpl.php  -->\n";
+print "<!-- BEGIN PHP TEMPLATE fraispro/core/tpl/linkedobjectblock_fraispro.tpl.php  -->\n";
 
 
 global $user;
@@ -39,7 +39,7 @@ global $noMoreLinkedObjectBlockAfter;
 $langs = $GLOBALS['langs'];
 '@phan-var-force Translate $langs';
 $linkedObjectBlock = $GLOBALS['linkedObjectBlock'];
-'@phan-var-force array<string,MyObject> $linkedObjectBlock';
+'@phan-var-force array<string,Fraispro> $linkedObjectBlock';
 
 // Load translation files required by the page
 $langs->load("fraispro");
@@ -54,7 +54,7 @@ foreach ($linkedObjectBlock as $key => $objectlink) {
 		$trclass .= ' liste_sub_total';
 	} ?>
 <tr class="<?php echo $trclass; ?>">
-	<td><?php echo $langs->trans("MyObject"); ?></td>
+	<td><?php echo $langs->trans("Fraispro"); ?></td>
 	<td><?php echo $objectlink->getNomUrl(1); ?></td>
 	<td></td>
 	<td class="center"><?php echo dol_print_date($objectlink->date_creation, 'day'); ?></td>

@@ -83,7 +83,7 @@ $modulepart = GETPOST('modulepart', 'aZ09');	// Used by actions_setmoduleoptions
 $value = GETPOST('value', 'alpha');
 $label = GETPOST('label', 'alpha');
 $scandir = GETPOST('scan_dir', 'alpha');
-$type = 'myobject';
+$type = 'Fraispro';
 
 $error = 0;
 $setupnotempty = 0;
@@ -110,82 +110,19 @@ if (!$user->admin) {
 
 // Enter here all parameters in your setup page
 
-// Setup conf for selection of an URL
-$item = $formSetup->newItem('FRAISPRO_MYPARAM1');
-$item->fieldParams['isMandatory'] = 1;
-$item->fieldAttr['placeholder'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
-$item->cssClass = 'minwidth500';
+// Product/Service to use when adding lines to invoices
+$item = $formSetup->newItem('FRAISPRO_DEFAULT_PRODUCT');
+$item->setAsProduct();
+$item->helpText = $langs->trans('FraisproDefaultProductHelp');
 
-// Setup conf for selection of a simple string input
-$item = $formSetup->newItem('FRAISPRO_MYPARAM2');
-$item->defaultFieldValue = 'default value';
-$item->fieldAttr['placeholder'] = 'A placeholder here';
-$item->helpText = 'Tooltip text';
-
-// Setup conf for selection of a simple textarea input but we replace the text of field title
-$item = $formSetup->newItem('FRAISPRO_MYPARAM3');
-$item->nameText = $item->getNameText().' more html text ';
-
-// Setup conf for a selection of a Thirdparty
-$item = $formSetup->newItem('FRAISPRO_MYPARAM4');
-$item->setAsThirdpartyType();
-
-// Setup conf for a selection of a boolean
-$formSetup->newItem('FRAISPRO_MYPARAM5')->setAsYesNo();
-
-// Setup conf for a selection of an Email template of type thirdparty
-$formSetup->newItem('FRAISPRO_MYPARAM6')->setAsEmailTemplate('thirdparty');
-
-// Setup conf for a selection of a secured key
-//$formSetup->newItem('FRAISPRO_MYPARAM7')->setAsSecureKey();
-
-// Setup conf for a selection of a Product
-$formSetup->newItem('FRAISPRO_MYPARAM8')->setAsProduct();
-
-// Add a title for a new section
-$formSetup->newItem('NewSection')->setAsTitle();
-
-$TField = array(
-	'test01' => $langs->trans('test01'),
-	'test02' => $langs->trans('test02'),
-	'test03' => $langs->trans('test03'),
-	'test04' => $langs->trans('test04'),
-	'test05' => $langs->trans('test05'),
-	'test06' => $langs->trans('test06'),
+// Description format for invoice lines
+$TDescOptions = array(
+	'description' => $langs->trans('FraisproDescOptionDescription'),
+	'ref_and_id' => $langs->trans('FraisproDescOptionRefAndId'),
 );
-
-// Setup conf for a simple combo list
-$formSetup->newItem('FRAISPRO_MYPARAM9')->setAsSelect($TField);
-
-// Setup conf for a multiselect combo list
-$item = $formSetup->newItem('FRAISPRO_MYPARAM10');
-$item->setAsMultiSelect($TField);
-$item->helpText = $langs->transnoentities('FRAISPRO_MYPARAM10');
-
-// Setup conf for a category selection
-$formSetup->newItem('FRAISPRO_CATEGORY_ID_XXX')->setAsCategory('product');
-
-// Setup conf FRAISPRO_MYPARAM10
-$item = $formSetup->newItem('FRAISPRO_MYPARAM10');
-$item->setAsColor();
-$item->defaultFieldValue = '#FF0000';
-//$item->fieldValue = '';
-//$item->fieldAttr = array() ; // fields attribute only for compatible fields like input text
-//$item->fieldOverride = false; // set this var to override field output will override $fieldInputOverride and $fieldOutputOverride too
-//$item->fieldInputOverride = false; // set this var to override field input
-//$item->fieldOutputOverride = false; // set this var to override field output
-
-$item = $formSetup->newItem('FRAISPRO_MYPARAM11')->setAsHtml();
-$item->nameText = $item->getNameText().' more html text ';
-$item->fieldInputOverride = '';
-$item->helpText = $langs->transnoentities('HelpMessage');
-$item->cssClass = 'minwidth500';
-
-$item = $formSetup->newItem('FRAISPRO_MYPARAM12');
-$item->fieldOverride = "Value forced, can't be modified";
-$item->cssClass = 'minwidth500';
-
-//$item = $formSetup->newItem('FRAISPRO_MYPARAM13')->setAsDate();	// Not yet implemented
+$item = $formSetup->newItem('FRAISPRO_LINE_DESC_FORMAT');
+$item->setAsSelect($TDescOptions);
+$item->helpText = $langs->trans('FraisproLineDescFormatHelp');
 
 // End of definition of parameters
 
@@ -198,7 +135,7 @@ $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 $moduledir = 'fraispro';
 $myTmpObjects = array();
 // TODO Scan list of objects to fill this array
-$myTmpObjects['myobject'] = array('label' => 'MyObject', 'includerefgeneration' => 0, 'includedocgeneration' => 0, 'class' => 'MyObject');
+$myTmpObjects['Fraispro'] = array('label' => 'Fraispro', 'includerefgeneration' => 0, 'includedocgeneration' => 0, 'class' => 'Fraispro');
 
 $tmpobjectkey = GETPOST('object', 'aZ09');
 if ($tmpobjectkey && !array_key_exists($tmpobjectkey, $myTmpObjects)) {
@@ -238,7 +175,7 @@ if ($action == 'updateMask') {
 
 	$className = $myTmpObjects[$tmpobjectkey]['class'];
 	$tmpobject = new $className($db);
-	'@phan-var-force MyObject $tmpobject';
+	'@phan-var-force Fraispro $tmpobject';
 	$tmpobject->initAsSpecimen();
 
 	// Search template files
@@ -257,9 +194,9 @@ if ($action == 'updateMask') {
 		require_once $file;
 
 		$module = new $className($db);
-		'@phan-var-force ModelePDFMyObject $module';
+		'@phan-var-force ModelePDFFraispro $module';
 
-		'@phan-var-force ModelePDFMyObject $module';
+		'@phan-var-force ModelePDFFraispro $module';
 
 		if ($module->write_file($tmpobject, $langs) > 0) {
 			header("Location: ".DOL_URL_ROOT."/document.php?modulepart=fraispro-".strtolower($tmpobjectkey)."&file=SPECIMEN.pdf");
@@ -389,7 +326,7 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 							require_once $dir.'/'.$file.'.php';
 
 							$module = new $file($db);
-							'@phan-var-force ModeleNumRefMyObject $module';
+							'@phan-var-force ModeleNumRefFraispro $module';
 
 							// Show modules according to features level
 							if ($module->version == 'development' && getDolGlobalInt('MAIN_FEATURES_LEVEL') < 2) {
@@ -434,7 +371,7 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 
 								$className = $myTmpObjectArray['class'];
 								$mytmpinstance = new $className($db);
-								'@phan-var-force MyObject $mytmpinstance';
+								'@phan-var-force Fraispro $mytmpinstance';
 								$mytmpinstance->initAsSpecimen();
 
 								// Info
@@ -532,7 +469,7 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 
 									require_once $dir.'/'.$file;
 									$module = new $className($db);
-									'@phan-var-force ModelePDFMyObject $module';
+									'@phan-var-force ModelePDFFraispro $module';
 
 									$modulequalified = 1;
 									if ($module->version == 'development' && getDolGlobalInt('MAIN_FEATURES_LEVEL') < 2) {

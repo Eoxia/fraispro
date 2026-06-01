@@ -18,8 +18,8 @@
  */
 
 /**
- *       \file       htdocs/fraispro/ajax/myobject.php
- *       \brief      File to return Ajax response on myobject list request
+ *       \file       htdocs/fraispro/ajax/Fraispro.php
+ *       \brief      File to return Ajax response on Fraispro list request
  */
 
 if (!defined('NOTOKENRENEWAL')) {
@@ -55,7 +55,7 @@ if (!$res && file_exists("../../../main.inc.php")) {
 if (!$res) {
 	die("Include of main fails");
 }
-dol_include_once('/fraispro/class/myobject.class.php');
+dol_include_once('/fraispro/class/fraispro.class.php');
 
 /**
  * @var Conf $conf
@@ -71,10 +71,10 @@ $field = GETPOST('field', 'aZ09');
 $value = GETPOST('value', 'aZ09');
 
 // @phan-suppress-next-line PhanUndeclaredClass
-$object = new MyObject($db);
+$object = new Fraispro($db);
 
 // Security check
-if (!$user->hasRight('fraispro', 'myobject', 'write')) {
+if (!$user->hasRight('fraispro', 'Fraispro', 'write')) {
 	accessforbidden();
 }
 
@@ -82,7 +82,7 @@ if (!$user->hasRight('fraispro', 'myobject', 'write')) {
  * View
  */
 
-dol_syslog("Call ajax fraispro/ajax/myobject.php");
+dol_syslog("Call ajax fraispro/ajax/Fraispro.php");
 
 top_httphead();
 

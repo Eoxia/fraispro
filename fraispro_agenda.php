@@ -18,9 +18,9 @@
  */
 
 /**
- *  \file       htdocs/modulebuilder/template/myobject_agenda.php
+ *  \file       htdocs/modulebuilder/template/fraispro_agenda.php
  *  \ingroup    fraispro
- *  \brief      Tab of events on MyObject
+ *  \brief      Tab of events on Fraispro
  */
 
 //if (! defined('NOREQUIREDB'))              define('NOREQUIREDB', '1');				// Do not create database handler $db
@@ -80,8 +80,8 @@ if (!$res) {
 require_once DOL_DOCUMENT_ROOT.'/contact/class/contact.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
-dol_include_once('/fraispro/class/myobject.class.php');
-dol_include_once('/fraispro/lib/fraispro_myobject.lib.php');
+dol_include_once('/fraispro/class/fraispro.class.php');
+dol_include_once('/fraispro/lib/fraispro_fraispro.lib.php');
 
 /**
  * @var Conf $conf
@@ -131,7 +131,7 @@ if (!$sortorder) {
 }
 
 // Initialize a technical objects
-$object = new MyObject($db);
+$object = new Fraispro($db);
 $extrafields = new ExtraFields($db);
 $diroutputmassaction = $conf->fraispro->dir_output.'/temp/massgeneration/'.$user->id;
 $hookmanager->initHooks(array($object->element.'agenda', 'globalcard')); // Note that conf->hooks_modules contains array
@@ -148,8 +148,8 @@ if ($id > 0 || !empty($ref)) {
 // Set $enablepermissioncheck to 1 to enable a minimum low level of checks
 $enablepermissioncheck = getDolGlobalInt('FRAISPRO_ENABLE_PERMISSION_CHECK');
 if ($enablepermissioncheck) {
-	$permissiontoread = $user->hasRight('fraispro', 'myobject', 'read');
-	$permissiontoadd = $user->hasRight('fraispro', 'myobject', 'write');
+	$permissiontoread = $user->hasRight('fraispro', 'Fraispro', 'read');
+	$permissiontoadd = $user->hasRight('fraispro', 'Fraispro', 'write');
 } else {
 	$permissiontoread = 1;
 	$permissiontoadd = 1;
@@ -201,7 +201,7 @@ if (empty($reshook)) {
 $form = new Form($db);
 
 if ($object->id > 0) {
-	$title = $langs->trans("MyObject")." - ".$langs->trans('Agenda');
+	$title = $langs->trans("Fraispro")." - ".$langs->trans('Agenda');
 	//$title = $object->ref." - ".$langs->trans("Agenda");
 	$help_url = 'EN:Module_Agenda_En|DE:Modul_Terminplanung';
 
@@ -210,14 +210,14 @@ if ($object->id > 0) {
 	if (isModEnabled('notification')) {
 		$langs->load("mails");
 	}
-	$head = myobjectPrepareHead($object);
+	$head = fraisproPrepareHead($object);
 
 
-	print dol_get_fiche_head($head, 'agenda', $langs->trans("MyObject"), -1, $object->picto);
+	print dol_get_fiche_head($head, 'agenda', $langs->trans("Fraispro"), -1, $object->picto);
 
 	// Object card
 	// ------------------------------------------------------------
-	$linkback = '<a href="'.dol_buildpath('/fraispro/myobject_list.php', 1).'?restore_lastsearch_values=1'.(!empty($socid) ? '&socid='.$socid : '').'">'.$langs->trans("BackToList").'</a>';
+	$linkback = '<a href="'.dol_buildpath('/fraispro/fraispro_list.php', 1).'?restore_lastsearch_values=1'.(!empty($socid) ? '&socid='.$socid : '').'">'.$langs->trans("BackToList").'</a>';
 
 	$morehtmlref = '<div class="refidno">';
 	/*

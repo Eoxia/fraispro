@@ -85,7 +85,7 @@ class fraisprowidget1 extends ModeleBoxes
 		// Condition when module is enabled or not
 		// $this->enabled = getDolGlobalInt('MAIN_FEATURES_LEVEL') > 0;
 		// Condition when module is visible by user (test on permission)
-		// $this->hidden = !$user->hasRight('fraispro', 'myobject', 'read');
+		// $this->hidden = !$user->hasRight('fraispro', 'Fraispro', 'read');
 	}
 
 	/**

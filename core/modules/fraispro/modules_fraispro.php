@@ -25,9 +25,9 @@
  */
 
 /**
- *  \file			htdocs/core/modules/fraispro/modules_myobject.php
+ *  \file			htdocs/core/modules/fraispro/modules_fraispro.php
  *  \ingroup		fraispro
- *  \brief			File with parent class for myobject document models and parent class for myobject numbering models
+ *  \brief			File with parent class for Fraispro document models and parent class for Fraispro numbering models
  */
 
 require_once DOL_DOCUMENT_ROOT.'/core/class/commondocgenerator.class.php';
@@ -37,7 +37,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/commonnumrefgenerator.class.php';
 /**
  *	Parent class for document models
  */
-abstract class ModelePDFMyObject extends CommonDocGenerator
+abstract class ModelePDFFraispro extends CommonDocGenerator
 {
 	// phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
 	/**
@@ -50,7 +50,7 @@ abstract class ModelePDFMyObject extends CommonDocGenerator
 	public static function liste_modeles($db, $maxfilenamelength = 0)
 	{
 		// phpcs:enable
-		$type = 'myobject';
+		$type = 'Fraispro';
 		$list = array();
 
 		include_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
@@ -63,7 +63,7 @@ abstract class ModelePDFMyObject extends CommonDocGenerator
 	/**
 	 *	Function to build a document on disk
 	 *
-	 *	@param	MyObject			$object				Object source to build document
+	 *	@param	Fraispro			$object				Object source to build document
 	 *	@param	Translate			$outputlangs		Lang output object
 	 *	@param	string				$srctemplatepath	Full path of source filename for generator using a template file
 	 *	@param	int<0,1>			$hidedetails		Do not show line details
@@ -76,9 +76,9 @@ abstract class ModelePDFMyObject extends CommonDocGenerator
 
 
 /**
- *  Parent class to manage numbering of MyObject
+ *  Parent class to manage numbering of Fraispro
  */
-abstract class ModeleNumRefMyObject extends CommonNumRefGenerator
+abstract class ModeleNumRefFraispro extends CommonNumRefGenerator
 {
 	/**
 	 *  Return an example of numbering
@@ -90,7 +90,7 @@ abstract class ModeleNumRefMyObject extends CommonNumRefGenerator
 	/**
 	 * 	Return next free value
 	 *
-	 *  @param  MyObject		$object		Object we need next value for
+	 *  @param  Fraispro		$object		Object we need next value for
 	 *  @return string|int<-1,0>			Next value if OK, <=0 if KO
 	 */
 	abstract public function getNextValue($object);

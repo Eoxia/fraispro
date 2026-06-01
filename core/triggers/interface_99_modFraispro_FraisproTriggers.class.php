@@ -308,4 +308,54 @@ class InterfaceFraisproTriggers extends DolibarrTriggers
 
 		return 0;
 	}
+
+	/**
+	 * Clean up links when an invoice line is deleted
+	 *
+	 * @param string        $action     Event action code
+	 * @param CommonObject  $object     Object invoice line
+	 * @param User          $user       Object user
+	 * @param Translate     $langs      Object langs
+	 * @param Conf          $conf       Object conf
+	 * @return int                      Return integer <0 if KO, 0 if no triggered ran, >0 if OK
+	 */
+	public function linebillDelete($action, $object, User $user, Translate $langs, Conf $conf)
+	{
+		$sql = "UPDATE " . $this->db->prefix() . "expensereport_det";
+		$sql .= " SET fk_facture = 0";
+		$sql .= " WHERE fk_facture = " . ((int) $object->id);
+
+		$resql = $this->db->query($sql);
+		if (!$resql) {
+			$this->error = $this->db->lasterror();
+			return -1;
+		}
+
+		return 1;
+	}
+
+	/**
+	 * Clean up links when an invoice is deleted
+	 *
+	 * @param string        $action     Event action code
+	 * @param CommonObject  $object     Object invoice
+	 * @param User          $user       Object user
+	 * @param Translate     $langs      Object langs
+	 * @param Conf          $conf       Object conf
+	 * @return int                      Return integer <0 if KO, 0 if no triggered ran, >0 if OK
+	 */
+	public function billDelete($action, $object, User $user, Translate $langs, Conf $conf)
+	{
+		$sql = "UPDATE " . $this->db->prefix() . "expensereport_det";
+		$sql .= " SET fk_facture = 0";
+		$sql .= " WHERE fk_facture IN (SELECT rowid FROM " . $this->db->prefix() . "facturedet WHERE fk_facture = " . ((int) $object->id) . ")";
+
+		$resql = $this->db->query($sql);
+		if (!$resql) {
+			$this->error = $this->db->lasterror();
+			return -1;
+		}
+
+		return 1;
+	}
 }

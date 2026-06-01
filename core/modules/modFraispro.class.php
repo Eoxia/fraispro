@@ -71,8 +71,8 @@ class modFraispro extends DolibarrModules
 		$this->descriptionlong = "FraisproDescription";
 
 		// Author
-		$this->editor_name = 'Editor name';
-		$this->editor_url = 'https://www.example.com';		// Must be an external online web site
+		$this->editor_name = 'Eoxia';
+		$this->editor_url = 'https://github.com/Eoxia/fraispro';		// Must be an external online web site
 		$this->editor_squarred_logo = 'object_fraispro.png@fraispro';					// Must be image filename into the module/img directory followed with @modulename. Example: 'myimage.png@fraispro'
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
@@ -158,7 +158,7 @@ class modFraispro extends DolibarrModules
 		// Prerequisites
 		$this->phpmin = array(7, 1); // Minimum version of PHP required by module
 		// $this->phpmax = array(8, 0); // Maximum version of PHP required by module
-		$this->need_dolibarr_version = array(19, -3); // Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(23, 0); // Minimum version of Dolibarr required by module
 		// $this->max_dolibarr_version = array(19, -3); // Maximum version of Dolibarr required by module
 		$this->need_javascript_ajax = 0;
 
@@ -271,8 +271,8 @@ class modFraispro extends DolibarrModules
 			//  0 => array(
 			//      'label' => 'MyJob label',
 			//      'jobtype' => 'method',
-			//      'class' => '/fraispro/class/myobject.class.php',
-			//      'objectname' => 'MyObject',
+			//      'class' => '/fraispro/class/fraispro.class.php',
+			//      'objectname' => 'Fraispro',
 			//      'method' => 'doScheduledJob',
 			//      'parameters' => '',
 			//      'comment' => 'Comment',
@@ -298,18 +298,18 @@ class modFraispro extends DolibarrModules
 		$o = 1;
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 1); // Permission id (must not be already used)
 		$this->rights[$r][1] = 'Read objects of Fraispro'; // Permission label
-		$this->rights[$r][4] = 'myobject';
-		$this->rights[$r][5] = 'read'; // In php code, permission will be checked by test if ($user->hasRight('fraispro', 'myobject', 'read'))
+		$this->rights[$r][4] = 'Fraispro';
+		$this->rights[$r][5] = 'read'; // In php code, permission will be checked by test if ($user->hasRight('fraispro', 'Fraispro', 'read'))
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 2); // Permission id (must not be already used)
 		$this->rights[$r][1] = 'Create/Update objects of Fraispro'; // Permission label
-		$this->rights[$r][4] = 'myobject';
-		$this->rights[$r][5] = 'write'; // In php code, permission will be checked by test if ($user->hasRight('fraispro', 'myobject', 'write'))
+		$this->rights[$r][4] = 'Fraispro';
+		$this->rights[$r][5] = 'write'; // In php code, permission will be checked by test if ($user->hasRight('fraispro', 'Fraispro', 'write'))
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 3); // Permission id (must not be already used)
 		$this->rights[$r][1] = 'Delete objects of Fraispro'; // Permission label
-		$this->rights[$r][4] = 'myobject';
-		$this->rights[$r][5] = 'delete'; // In php code, permission will be checked by test if ($user->hasRight('fraispro', 'myobject', 'delete'))
+		$this->rights[$r][4] = 'Fraispro';
+		$this->rights[$r][5] = 'delete'; // In php code, permission will be checked by test if ($user->hasRight('fraispro', 'Fraispro', 'delete'))
 		$r++;
 		*/
 		/* END MODULEBUILDER PERMISSIONS */
@@ -331,84 +331,125 @@ class modFraispro extends DolibarrModules
 			'langs' => 'fraispro@fraispro', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 			'position' => 1000 + $r,
 			'enabled' => 'isModEnabled("fraispro")', // Define condition to show or hide menu entry. Use 'isModEnabled("fraispro")' if entry must be visible if module is enabled.
-			'perms' => '1', // Use 'perms'=>'$user->hasRight("fraispro", "myobject", "read")' if you want your menu with a permission rules
+			'perms' => '1', // Use 'perms'=>'$user->hasRight("fraispro", "Fraispro", "read")' if you want your menu with a permission rules
 			'target' => '',
 			'user' => 2, // 0=Menu for internal users, 1=external users, 2=both
 		);
 		/* END MODULEBUILDER TOPMENU */
 
-		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT */
-		/*
-		$this->menu[$r++]=array(
-			'fk_menu' => 'fk_mainmenu=fraispro',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type' => 'left',                          // This is a Left menu entry
-			'titre' => 'MyObject',
-			'prefix' => img_picto('', $this->picto, 'class="pictofixedwidth valignmiddle paddingright"'),
+		/* BEGIN MODULEBUILDER LEFTMENU Fraispro */
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro',
+			'type' => 'left',
+			'titre' => 'NoteDeFrais',
+			'prefix' => img_picto('', 'fraispro@fraispro', 'class="pictofixedwidth valignmiddle paddingright"'),
 			'mainmenu' => 'fraispro',
-			'leftmenu' => 'myobject',
-			'url' => '/fraispro/fraisproindex.php',
-			'langs' => 'fraispro@fraispro',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+			'leftmenu' => 'fraispro_notedefrais',
+			'url' => '/fraispro/fraispro_list.php',
+			'langs' => 'fraispro@fraispro',
 			'position' => 1000 + $r,
-			'enabled' => 'isModEnabled("fraispro")', // Define condition to show or hide menu entry. Use 'isModEnabled("fraispro")' if entry must be visible if module is enabled.
-			'perms' => '$user->hasRight("fraispro", "myobject", "read")',
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
 			'target' => '',
-			'user' => 2,				                // 0=Menu for internal users, 1=external users, 2=both
-			'object' => 'MyObject'
+			'user' => 2,
 		);
-		$this->menu[$r++]=array(
-			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=myobject',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type' => 'left',			                // This is a Left menu entry
-			'titre' => 'New_MyObject',
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_notedefrais',
+			'type' => 'left',
+			'titre' => 'NewNoteDeFrais',
 			'mainmenu' => 'fraispro',
-			'leftmenu' => 'fraispro_myobject_new',
-			'url' => '/fraispro/myobject_card.php?action=create',
-			'langs' => 'fraispro@fraispro',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+			'leftmenu' => 'fraispro_notedefrais_new',
+			'url' => '/expensereport/card.php?action=create&leftmenu=expensereport&mainmenu=hrm',
+			'langs' => 'fraispro@fraispro',
 			'position' => 1000 + $r,
-			'enabled' => 'isModEnabled("fraispro")', // Define condition to show or hide menu entry. Use 'isModEnabled("fraispro")' if entry must be visible if module is enabled. Use '$leftmenu==\'system\'' to show if leftmenu system is selected.
-			'perms' => '$user->hasRight("fraispro", "myobject", "write")'
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
 			'target' => '',
-			'user' => 2,				                // 0=Menu for internal users, 1=external users, 2=both
-			'object' => 'MyObject'
+			'user' => 2,
 		);
-		$this->menu[$r++]=array(
-			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=myobject',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type' => 'left',			                // This is a Left menu entry
-			'titre' => 'List_MyObject',
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_notedefrais',
+			'type' => 'left',
+			'titre' => 'ListNoteDeFrais',
 			'mainmenu' => 'fraispro',
-			'leftmenu' => 'fraispro_myobject_list',
-			'url' => '/fraispro/myobject_list.php',
-			'langs' => 'fraispro@fraispro',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+			'leftmenu' => 'fraispro_notedefrais_list',
+			'url' => '/fraispro/fraispro_list.php',
+			'langs' => 'fraispro@fraispro',
 			'position' => 1000 + $r,
-			'enabled' => 'isModEnabled("fraispro")', // Define condition to show or hide menu entry. Use 'isModEnabled("fraispro")' if entry must be visible if module is enabled.
-			'perms' => '$user->hasRight("fraispro", "myobject", "read")'
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
 			'target' => '',
-			'user' => 2,				                // 0=Menu for internal users, 1=external users, 2=both
-			'object' => 'MyObject'
+			'user' => 2,
 		);
-		*/
-		/* END MODULEBUILDER LEFTMENU MYOBJECT */
+
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro',
+			'type' => 'left',
+			'titre' => 'LignesNoteDeFrais',
+			'prefix' => img_picto('', 'fraispro@fraispro', 'class="pictofixedwidth valignmiddle paddingright"'),
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_lignesnotedefrais',
+			'url' => '/fraispro/fraisprodet_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_lignesnotedefrais',
+			'type' => 'left',
+			'titre' => 'ListLignesNoteDeFrais',
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_lignesnotedefrais_list',
+			'url' => '/fraispro/fraisprodet_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro',
+			'type' => 'left',
+			'titre' => 'Setup',
+			'prefix' => img_picto('', 'setup', 'class="pictofixedwidth valignmiddle paddingright"'),
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_setup',
+			'url' => '/fraispro/admin/setup.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '$user->admin',
+			'target' => '',
+			'user' => 0,
+		);
+		/* END MODULEBUILDER LEFTMENU Fraispro */
 
 
 		// Exports profiles provided by this module
 		$r = 0;
-		/* BEGIN MODULEBUILDER EXPORT MYOBJECT */
+		/* BEGIN MODULEBUILDER EXPORT Fraispro */
 		/*
 		$langs->load("fraispro@fraispro");
 		$this->export_code[$r] = $this->rights_class.'_'.$r;
-		$this->export_label[$r] = 'MyObjectLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
+		$this->export_label[$r] = 'FraisproDets';	// Translation key (used only if key ExportDataset_xxx_z not found)
 		$this->export_icon[$r] = $this->picto;
 		// Define $this->export_fields_array, $this->export_TypeFields_array and $this->export_entities_array
-		$keyforclass = 'MyObject'; $keyforclassfile='/fraispro/class/myobject.class.php'; $keyforelement='myobject@fraispro';
+		$keyforclass = 'Fraispro'; $keyforclassfile='/fraispro/class/fraispro.class.php'; $keyforelement='fraispro@fraispro';
 		include DOL_DOCUMENT_ROOT.'/core/commonfieldsinexport.inc.php';
 		//$this->export_fields_array[$r]['t.fieldtoadd']='FieldToAdd'; $this->export_TypeFields_array[$r]['t.fieldtoadd']='Text';
 		//unset($this->export_fields_array[$r]['t.fieldtoremove']);
-		//$keyforclass = 'MyObjectLine'; $keyforclassfile='/fraispro/class/myobject.class.php'; $keyforelement='myobjectline@fraispro'; $keyforalias='tl';
+		//$keyforclass = 'FraisproDet'; $keyforclassfile='/fraispro/class/fraispro.class.php'; $keyforelement='FraisproDet@fraispro'; $keyforalias='tl';
 		//include DOL_DOCUMENT_ROOT.'/core/commonfieldsinexport.inc.php';
-		$keyforselect='myobject'; $keyforaliasextra='extra'; $keyforelement='myobject@fraispro';
+		$keyforselect='Fraispro'; $keyforaliasextra='extra'; $keyforelement='fraispro@fraispro';
 		include DOL_DOCUMENT_ROOT.'/core/extrafieldsinexport.inc.php';
-		//$keyforselect='myobjectline'; $keyforaliasextra='extraline'; $keyforelement='myobjectline@fraispro';
+		//$keyforselect='FraisproDet'; $keyforaliasextra='extraline'; $keyforelement='FraisproDet@fraispro';
 		//include DOL_DOCUMENT_ROOT.'/core/extrafieldsinexport.inc.php';
-		//$this->export_dependencies_array[$r] = array('myobjectline' => array('tl.rowid','tl.ref')); // To force to activate one or several fields if we select some fields that need same (like to select a unique key if we ask a field of a child to avoid the DISTINCT to discard them, or for computed field than need several other fields)
+		//$this->export_dependencies_array[$r] = array('FraisproDet' => array('tl.rowid','tl.ref')); // To force to activate one or several fields if we select some fields that need same (like to select a unique key if we ask a field of a child to avoid the DISTINCT to discard them, or for computed field than need several other fields)
 		//$this->export_special_array[$r] = array('t.field' => '...');
 		//$this->export_examplevalues_array[$r] = array('t.field' => 'Example');
 		//$this->export_help_array[$r] = array('t.field' => 'FieldDescHelp');
@@ -416,25 +457,25 @@ class modFraispro extends DolibarrModules
 		$this->export_sql_end[$r]  =' FROM '.$this->db->prefix().'fraispro_myobject as t';
 		//$this->export_sql_end[$r]  .=' LEFT JOIN '.$this->db->prefix().'fraispro_myobject_line as tl ON tl.fk_myobject = t.rowid';
 		$this->export_sql_end[$r] .=' WHERE 1 = 1';
-		$this->export_sql_end[$r] .=' AND t.entity IN ('.getEntity('myobject').')';
+		$this->export_sql_end[$r] .=' AND t.entity IN ('.getEntity('Fraispro').')';
 		$r++; */
-		/* END MODULEBUILDER EXPORT MYOBJECT */
+		/* END MODULEBUILDER EXPORT Fraispro */
 
 		// Imports profiles provided by this module
 		$r = 0;
-		/* BEGIN MODULEBUILDER IMPORT MYOBJECT */
+		/* BEGIN MODULEBUILDER IMPORT Fraispro */
 		/*
 		$langs->load("fraispro@fraispro");
 		$this->import_code[$r] = $this->rights_class.'_'.$r;
-		$this->import_label[$r] = 'MyObjectLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
+		$this->import_label[$r] = 'FraisproDets';	// Translation key (used only if key ExportDataset_xxx_z not found)
 		$this->import_icon[$r] = $this->picto;
 		$this->import_tables_array[$r] = array('t' => $this->db->prefix().'fraispro_myobject', 'extra' => $this->db->prefix().'fraispro_myobject_extrafields');
 		$this->import_tables_creator_array[$r] = array('t' => 'fk_user_author'); // Fields to store import user id
 		$import_sample = array();
-		$keyforclass = 'MyObject'; $keyforclassfile='/fraispro/class/myobject.class.php'; $keyforelement='myobject@fraispro';
+		$keyforclass = 'Fraispro'; $keyforclassfile='/fraispro/class/fraispro.class.php'; $keyforelement='fraispro@fraispro';
 		include DOL_DOCUMENT_ROOT.'/core/commonfieldsinimport.inc.php';
 		$import_extrafield_sample = array();
-		$keyforselect='myobject'; $keyforaliasextra='extra'; $keyforelement='myobject@fraispro';
+		$keyforselect='Fraispro'; $keyforaliasextra='extra'; $keyforelement='fraispro@fraispro';
 		include DOL_DOCUMENT_ROOT.'/core/extrafieldsinimport.inc.php';
 		$this->import_fieldshidden_array[$r] = array('extra.fk_object' => 'lastrowid-'.$this->db->prefix().'fraispro_myobject');
 		$this->import_regex_array[$r] = array();
@@ -443,10 +484,10 @@ class modFraispro extends DolibarrModules
 		$this->import_convertvalue_array[$r] = array(
 			't.ref' => array(
 				'rule'=>'getrefifauto',
-				'class'=>(!getDolGlobalString('FRAISPRO_MYOBJECT_ADDON') ? 'mod_myobject_standard' : getDolGlobalString('FRAISPRO_MYOBJECT_ADDON')),
-				'path'=>"/core/modules/fraispro/".(!getDolGlobalString('FRAISPRO_MYOBJECT_ADDON') ? 'mod_myobject_standard' : getDolGlobalString('FRAISPRO_MYOBJECT_ADDON')).'.php',
-				'classobject'=>'MyObject',
-				'pathobject'=>'/fraispro/class/myobject.class.php',
+				'class'=>(!getDolGlobalString('FRAISPRO_MYOBJECT_ADDON') ? 'mod_fraispro_standard' : getDolGlobalString('FRAISPRO_MYOBJECT_ADDON')),
+				'path'=>"/core/modules/fraispro/".(!getDolGlobalString('FRAISPRO_MYOBJECT_ADDON') ? 'mod_fraispro_standard' : getDolGlobalString('FRAISPRO_MYOBJECT_ADDON')).'.php',
+				'classobject'=>'Fraispro',
+				'pathobject'=>'/fraispro/class/fraispro.class.php',
 			),
 			't.fk_soc' => array('rule' => 'fetchidfromref', 'file' => '/societe/class/societe.class.php', 'class' => 'Societe', 'method' => 'fetch', 'element' => 'ThirdParty'),
 			't.fk_user_valid' => array('rule' => 'fetchidfromref', 'file' => '/user/class/user.class.php', 'class' => 'User', 'method' => 'fetch', 'element' => 'user'),
@@ -454,7 +495,7 @@ class modFraispro extends DolibarrModules
 		);
 		$this->import_run_sql_after_array[$r] = array();
 		$r++; */
-		/* END MODULEBUILDER IMPORT MYOBJECT */
+		/* END MODULEBUILDER IMPORT Fraispro */
 	}
 
 	/**
@@ -470,11 +511,12 @@ class modFraispro extends DolibarrModules
 		global $conf, $langs;
 
 		// Create tables of module at module activation
+		// Disabled: no custom tables needed for now, using native Dolibarr expense report tables
 		//$result = $this->_load_tables('/install/mysql/', 'fraispro');
-		$result = $this->_load_tables('/fraispro/sql/');
-		if ($result < 0) {
-			return -1; // Do not activate module if error 'not allowed' returned when loading module SQL queries (the _load_table run sql with run_sql with the error allowed parameter set to 'default')
-		}
+		//$result = $this->_load_tables('/fraispro/sql/');
+		//if ($result < 0) {
+		//	return -1; // Do not activate module if error 'not allowed' returned when loading module SQL queries (the _load_table run sql with run_sql with the error allowed parameter set to 'default')
+		//}
 
 		// Create extrafields during init
 		//include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
@@ -494,7 +536,7 @@ class modFraispro extends DolibarrModules
 		// Document templates
 		$moduledir = dol_sanitizeFileName('fraispro');
 		$myTmpObjects = array();
-		$myTmpObjects['MyObject'] = array('includerefgeneration' => 0, 'includedocgeneration' => 0);
+		$myTmpObjects['Fraispro'] = array('includerefgeneration' => 0, 'includedocgeneration' => 0);
 
 		foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 			if ($myTmpObjectArray['includerefgeneration']) {

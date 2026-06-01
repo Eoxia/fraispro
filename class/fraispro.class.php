@@ -18,9 +18,9 @@
  */
 
 /**
- * \file        htdocs/modulebuilder/template/class/myobject.class.php
+ * \file        htdocs/modulebuilder/template/class/fraispro.class.php
  * \ingroup     fraispro
- * \brief       This file is a CRUD class file for MyObject (Create/Read/Update/Delete)
+ * \brief       This file is a CRUD class file for Fraispro (Create/Read/Update/Delete)
  */
 
 // Put here all includes required by your class file
@@ -29,9 +29,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/commonobject.class.php';
 //require_once DOL_DOCUMENT_ROOT . '/product/class/product.class.php';
 
 /**
- * Class for MyObject
+ * Class for Fraispro
  */
-class MyObject extends CommonObject
+class Fraispro extends CommonObject
 {
 	/**
 	 * @var string 		ID of module.
@@ -41,7 +41,7 @@ class MyObject extends CommonObject
 	/**
 	 * @var string 		ID to identify managed object.
 	 */
-	public $element = 'myobject';
+	public $element = 'fraispro';
 
 	/**
 	 * @var string 		Name of table without prefix where object is stored. This is also the key used for extrafields management (so extrafields know the link to the parent table).
@@ -49,12 +49,12 @@ class MyObject extends CommonObject
 	public $table_element = 'fraispro_myobject';
 
 	/**
-	 * @var string 		If permission must be checkec with hasRight('fraispro', 'read') and not hasright('mymodyle', 'myobject', 'read'), you can uncomment this line
+	 * @var string 		If permission must be checkec with hasRight('fraispro', 'read') and not hasright('mymodyle', 'Fraispro', 'read'), you can uncomment this line
 	 */
 	//public $element_for_permission = 'fraispro';
 
 	/**
-	 * @var string 		String with name of icon for myobject. Must be a 'fa-xxx' fontawesome code (or 'fa-xxx_fa_color_size') or 'myobject@fraispro' if picto is file 'img/object_myobject.png'.
+	 * @var string 		String with name of icon for Fraispro. Must be a 'fa-xxx' fontawesome code (or 'fa-xxx_fa_color_size') or 'fraispro@fraispro' if picto is file 'img/object_myobject.png'.
 	 */
 	public $picto = 'fa-file';
 
@@ -219,12 +219,12 @@ class MyObject extends CommonObject
 	// /**
 	//  * @var string    Name of subtable class that manage subtable lines
 	//  */
-	// public $class_element_line = 'MyObjectline';
+	// public $class_element_line = 'FraisproDet';
 
 	// /**
 	//  * @var array	List of child tables. To test if we can delete object.
 	//  */
-	// protected $childtables = array('mychildtable' => array('name'=>'MyObject', 'fk_element'=>'fk_myobject'));
+	// protected $childtables = array('mychildtable' => array('name'=>'Fraispro', 'fk_element'=>'fk_myobject'));
 
 	// /**
 	//  * @var array    List of child tables. To know object to delete on cascade.
@@ -235,7 +235,7 @@ class MyObject extends CommonObject
 	// protected $childtablesoncascade = array('fraispro_myobjectdet');
 
 	// /**
-	//  * @var MyObjectLine[]     Array of subtable lines
+	//  * @var FraisproDet[]     Array of subtable lines
 	//  */
 	// public $lines = array();
 
@@ -260,7 +260,7 @@ class MyObject extends CommonObject
 		}
 
 		// Example to show how to set values of fields definition dynamically
-		/*if ($user->hasRight('fraispro', 'myobject', 'read')) {
+		/*if ($user->hasRight('fraispro', 'Fraispro', 'read')) {
 			$this->fields['myfield']['visible'] = 1;
 			$this->fields['myfield']['noteditable'] = 0;
 		}*/
@@ -583,7 +583,7 @@ class MyObject extends CommonObject
 			return 0;
 		}
 
-		/* if (! ((!getDolGlobalInt('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('fraispro', 'myobject', 'write'))
+		/* if (! ((!getDolGlobalInt('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('fraispro', 'Fraispro', 'write'))
 		 || (getDolGlobalInt('MAIN_USE_ADVANCED_PERMS') && $user->hasRight('fraispro', 'myobject_advance', 'validate')))
 		 {
 		 $this->error='NotEnoughPermissions';
@@ -643,15 +643,15 @@ class MyObject extends CommonObject
 			// Rename directory if dir was a temporary ref
 			if (preg_match('/^[\(]?PROV/i', $this->ref)) {
 				// Now we rename also files into index
-				$sql = 'UPDATE '.$this->db->prefix()."ecm_files set filename = CONCAT('".$this->db->escape($this->newref)."', SUBSTR(filename, ".(strlen($this->ref) + 1).")), filepath = 'myobject/".$this->db->escape($this->newref)."'";
-				$sql .= " WHERE filename LIKE '".$this->db->escape($this->ref)."%' AND filepath = 'myobject/".$this->db->escape($this->ref)."' and entity = ".$conf->entity;
+				$sql = 'UPDATE '.$this->db->prefix()."ecm_files set filename = CONCAT('".$this->db->escape($this->newref)."', SUBSTR(filename, ".(strlen($this->ref) + 1).")), filepath = 'Fraispro/".$this->db->escape($this->newref)."'";
+				$sql .= " WHERE filename LIKE '".$this->db->escape($this->ref)."%' AND filepath = 'Fraispro/".$this->db->escape($this->ref)."' and entity = ".$conf->entity;
 				$resql = $this->db->query($sql);
 				if (!$resql) {
 					$error++;
 					$this->error = $this->db->lasterror();
 				}
-				$sql = 'UPDATE '.$this->db->prefix()."ecm_files set filepath = 'myobject/".$this->db->escape($this->newref)."'";
-				$sql .= " WHERE filepath = 'myobject/".$this->db->escape($this->ref)."' and entity = ".$conf->entity;
+				$sql = 'UPDATE '.$this->db->prefix()."ecm_files set filepath = 'Fraispro/".$this->db->escape($this->newref)."'";
+				$sql .= " WHERE filepath = 'Fraispro/".$this->db->escape($this->ref)."' and entity = ".$conf->entity;
 				$resql = $this->db->query($sql);
 				if (!$resql) {
 					$error++;
@@ -661,15 +661,15 @@ class MyObject extends CommonObject
 				// We rename directory ($this->ref = old ref, $num = new ref) in order not to lose the attachments
 				$oldref = dol_sanitizeFileName($this->ref);
 				$newref = dol_sanitizeFileName($num);
-				$dirsource = $conf->fraispro->dir_output.'/myobject/'.$oldref;
-				$dirdest = $conf->fraispro->dir_output.'/myobject/'.$newref;
+				$dirsource = $conf->fraispro->dir_output.'/Fraispro/'.$oldref;
+				$dirdest = $conf->fraispro->dir_output.'/Fraispro/'.$newref;
 				if (!$error && file_exists($dirsource)) {
 					dol_syslog(get_class($this)."::validate() rename dir ".$dirsource." into ".$dirdest);
 
 					if (@rename($dirsource, $dirdest)) {
 						dol_syslog("Rename ok");
 						// Rename docs starting with $oldref with $newref
-						$listoffiles = dol_dir_list($conf->fraispro->dir_output.'/myobject/'.$newref, 'files', 1, '^'.preg_quote($oldref, '/'));
+						$listoffiles = dol_dir_list($conf->fraispro->dir_output.'/Fraispro/'.$newref, 'files', 1, '^'.preg_quote($oldref, '/'));
 						foreach ($listoffiles as $fileentry) {
 							$dirsource = $fileentry['name'];
 							$dirdest = preg_replace('/^'.preg_quote($oldref, '/').'/', $newref, $dirsource);
@@ -786,7 +786,7 @@ class MyObject extends CommonObject
 		if (getDolGlobalInt('MAIN_OPTIMIZEFORTEXTBROWSER')) {
 			return ['optimize' => $langs->trans("ShowMyObject")];
 		}
-		$datas['picto'] = img_picto('', $this->picto).' <u>'.$langs->trans("MyObject").'</u>';
+		$datas['picto'] = img_picto('', $this->picto).' <u>'.$langs->trans("Fraispro").'</u>';
 		if (isset($this->status)) {
 			$datas['picto'] .= ' '.$this->getLibStatut(5);
 		}
@@ -834,7 +834,7 @@ class MyObject extends CommonObject
 			$label = implode($this->getTooltipContentArray($params));
 		}
 
-		$url = dol_buildpath('/fraispro/myobject_card.php', 1).'?id='.$this->id;
+		$url = dol_buildpath('/fraispro/fraispro_card.php', 1).'?id='.$this->id;
 
 		if ($option !== 'nolink') {
 			// Add param to save lastsearch_values or not
@@ -1100,7 +1100,7 @@ class MyObject extends CommonObject
 	{
 		$this->lines = array();
 
-		$objectline = new MyObjectLine($this->db);
+		$objectline = new FraisproDet($this->db);
 		$result = $objectline->fetchAll('ASC', 'position', 0, 0, '(fk_myobject:=:'.((int) $this->id).')');
 
 		if (is_numeric($result)) {
@@ -1123,7 +1123,7 @@ class MyObject extends CommonObject
 		$langs->load("fraispro@fraispro");
 
 		if (!getDolGlobalString('FRAISPRO_MYOBJECT_ADDON')) {
-			$conf->global->FRAISPRO_MYOBJECT_ADDON = 'mod_myobject_standard';
+			$conf->global->FRAISPRO_MYOBJECT_ADDON = 'mod_fraispro_standard';
 		}
 
 		if (getDolGlobalString('FRAISPRO_MYOBJECT_ADDON')) {
@@ -1148,7 +1148,7 @@ class MyObject extends CommonObject
 
 			if (class_exists($classname)) {
 				$obj = new $classname();
-				'@phan-var-force ModeleNumRefMyObject $obj';
+				'@phan-var-force ModeleNumRefFraispro $obj';
 				$numref = $obj->getNextValue($this);
 
 				if ($numref != '' && $numref != '-1') {
@@ -1189,12 +1189,12 @@ class MyObject extends CommonObject
 		$langs->load("fraispro@fraispro");
 
 		if (!dol_strlen($modele)) {
-			$modele = 'standard_myobject';
+			$modele = 'standard_fraispro';
 
 			if (!empty($this->model_pdf)) {
 				$modele = $this->model_pdf;
-			} elseif (getDolGlobalString('MYOBJECT_ADDON_PDF')) {
-				$modele = getDolGlobalString('MYOBJECT_ADDON_PDF');
+			} elseif (getDolGlobalString('FRAISPRO_ADDON_PDF')) {
+				$modele = getDolGlobalString('FRAISPRO_ADDON_PDF');
 			}
 		}
 
@@ -1261,18 +1261,18 @@ class MyObject extends CommonObject
 require_once DOL_DOCUMENT_ROOT.'/core/class/commonobjectline.class.php';
 
 /**
- * Class MyObjectLine. You can also remove this and generate a CRUD class for lines objects.
+ * Class FraisproDet. You can also remove this and generate a CRUD class for lines objects.
  */
-class MyObjectLine extends CommonObjectLine
+class FraisproDet extends CommonObjectLine
 {
-	// To complete with content of an object MyObjectLine
+	// To complete with content of an object FraisproDet
 	// We should have a field rowid, fk_myobject and position
 
 	/**
 	 * To overload
 	 * @see CommonObjectLine
 	 */
-	public $parent_element = '';		// Example: '' or 'myobject'
+	public $parent_element = '';		// Example: '' or 'Fraispro'
 
 	/**
 	 * To overload
