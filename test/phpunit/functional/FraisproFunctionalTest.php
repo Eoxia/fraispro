@@ -58,7 +58,7 @@ class FraisproFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase  // @
 	 */
 	protected static $dol_admin_pass = 'admin';
 	/** @var int Dolibarr module ID */
-	private static $module_id = 500000; // TODO: autodetect?
+	private static $module_id = 436355; // TODO: autodetect?
 
 	/** @var array Browsers to test with */
 	public static $browsers = array(
