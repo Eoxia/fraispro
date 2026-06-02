@@ -47,7 +47,7 @@ class modFraispro extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
-		$this->numero = 500000; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
+		$this->numero = 436355; // Reserved module id on https://wiki.dolibarr.org/index.php/List_of_modules_id
 
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'fraispro';
@@ -76,7 +76,7 @@ class modFraispro extends DolibarrModules
 		$this->editor_squarred_logo = 'object_fraispro.png@fraispro';					// Must be image filename into the module/img directory followed with @modulename. Example: 'myimage.png@fraispro'
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.0';
+		$this->version = '23.0.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
