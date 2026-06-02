@@ -1,0 +1,21 @@
+CREATE TABLE llx_fraispro_myobject(
+	rowid INTEGER AUTO_INCREMENT PRIMARY KEY,
+	entity INTEGER DEFAULT 1 NOT NULL,
+	ref VARCHAR(128) NOT NULL,
+	label VARCHAR(255),
+	amount DOUBLE(24,8) DEFAULT 0,
+	qty DOUBLE DEFAULT 0,
+	fk_soc INTEGER,
+	fk_project INTEGER,
+	description TEXT,
+	note_public TEXT,
+	note_private TEXT,
+	date_creation DATETIME NOT NULL,
+	tms TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	fk_user_creat INTEGER,
+	fk_user_modif INTEGER,
+	last_main_doc VARCHAR(255),
+	import_key VARCHAR(14),
+	model_pdf VARCHAR(255),
+	status INTEGER DEFAULT 0 NOT NULL
+) ENGINE=innodb;

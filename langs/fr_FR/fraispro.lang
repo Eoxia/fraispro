@@ -1,0 +1,53 @@
+# Translation file fr_FR
+ModuleFraisproName = Fraispro
+ModuleFraisproDesc = Gestion et refacturation avancée des notes de frais. Permet de lier chaque ligne de frais à une facture client, d'appliquer des marges personnalisées et de suivre les marges en temps réel.
+
+# Menus
+NoteDeFrais = Notes de frais
+NewNoteDeFrais = Nouveau
+ListNoteDeFrais = Liste
+LignesNoteDeFrais = Lignes de note de frais
+ListLignesNoteDeFrais = Liste
+
+# List columns
+LinkedInvoice = Facture liée
+Linked = Lié
+NotLinked = Non lié
+Line = Ligne
+
+# Link actions
+LinkToInvoice = Lier à une facture
+LinkToInvoiceLine = Lier à une ligne de facture
+Unlink = Délier
+Link = Lier
+SelectInvoice = -- Choisir une facture --
+SelectInvoiceLine = -- Choisir une ligne --
+ConfirmUnlink = Supprimer le lien avec la facture ?
+LinkCreated = Lien créé avec succès
+LinkRemoved = Lien supprimé
+ErrorLinkCreation = Erreur lors de la création du lien
+ErrorLinkRemoval = Erreur lors de la suppression du lien
+FraisproInvoiceClosedCannotUnlink = Facture validée, liaison verrouillée
+
+# Invoice selector
+TargetInvoice = Facture cible
+SelectDraftInvoice = -- Choisir une facture brouillon --
+Markup = Marge
+FixedAmount = Montant fixe
+Percentage = Pourcentage
+None = Aucune
+AddToInvoice = Ajouter à la facture
+LinesAddedToInvoice = %s ligne(s) ajoutée(s) à la facture %s
+ErrorAddingLines = Erreur lors de l'ajout des lignes
+ErrorInvoiceNotDraft = La facture sélectionnée n'est pas en brouillon
+
+# Parameters setup page
+FRAISPRO_DEFAULT_PRODUCT = Produit ou service par défaut
+FraisproDefaultProductHelp = Produit ou service qui sera ajouté à la facture liée
+FRAISPRO_LINE_DESC_FORMAT = Format de la description des lignes
+FraisproLineDescFormatHelp = Description ajoutée à la ligne de facturation
+FraisproDescOptionDescription = Description uniquement
+FraisproDescOptionRefAndId = Référence et ID de la ligne
+FraisproConfigureDefaultProductToBill = Il faut configurer le %sproduit/service par défaut%s pour la facturation
+
+
