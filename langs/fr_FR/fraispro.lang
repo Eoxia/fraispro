@@ -6,7 +6,7 @@ ModuleFraisproDesc = Gestion et refacturation avancée des notes de frais. Perme
 NoteDeFrais = Notes de frais
 NewNoteDeFrais = Nouveau
 ListNoteDeFrais = Liste
-LignesNoteDeFrais = Lignes de note de frais
+LignesNoteDeFrais = Refacturez vos NDF
 ListLignesNoteDeFrais = Liste
 
 # List columns
