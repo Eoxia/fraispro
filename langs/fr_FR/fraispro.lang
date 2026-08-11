@@ -51,3 +51,6 @@ FraisproDescOptionRefAndId = Référence et ID de la ligne
 FraisproConfigureDefaultProductToBill = Il faut configurer le %sproduit/service par défaut%s pour la facturation
 
 
+
+FraisproReceipt = Reçu / Facture
+FraisproReceipts = Reçus / Factures

@@ -73,3 +73,6 @@ FraisproDescOptionDescription = Description only
 FraisproDescOptionRefAndId = Line reference and ID
 FraisproConfigureDefaultProductToBill = You must configure the %sdefault product/service%s for invoicing
 
+
+FraisproReceipt = Receipt / Invoice
+FraisproReceipts = Receipts / Invoices
