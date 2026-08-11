@@ -234,7 +234,7 @@ class FraisproReceipt extends CommonObject
 	// /**
 	//  * @var string    Name of subtable line
 	//  */
-	// public $table_element_line = 'fraispro_myobjectline';
+	public $table_element_line = 'fraispro_receipt_det';
 
 	// /**
 	//  * @var string    Field name with ID of parent key if this object has a parent, Or Field name of in child tables to link to this record.
@@ -244,7 +244,7 @@ class FraisproReceipt extends CommonObject
 	// /**
 	//  * @var string    Name of subtable class that manage subtable lines
 	//  */
-	// public $class_element_line = 'FraisproReceiptLine';
+	public $class_element_line = 'FraisproReceiptLine';
 
 	// /**
 	//  * @var array	List of child tables. To test if we can delete object.
@@ -257,12 +257,12 @@ class FraisproReceipt extends CommonObject
 	//  *               call method ClassName->deleteByParentField(parentId, 'ParentFkFieldName') to fetch and delete child object.
 	//  *               Using an array like childtables should not be implemented because a child may have other child, so we must only use the method that call deleteByParentField().
 	//  */
-	// protected $childtablesoncascade = array('fraispro_myobjectdet');
+	protected $childtablesoncascade = array('fraispro_receipt_det');
 
 	// /**
 	//  * @var FraisproReceiptLine[]     Array of subtable lines
 	//  */
-	// public $lines = array();
+	public $lines = array();
 
 
 
