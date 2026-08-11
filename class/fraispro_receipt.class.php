@@ -239,17 +239,17 @@ class FraisproReceipt extends CommonObject
 	// /**
 	//  * @var string    Field name with ID of parent key if this object has a parent, Or Field name of in child tables to link to this record.
 	//  */
-	// public $fk_element = 'fk_myobject';
+	// public $fk_element = 'fk_fraispro_receipt';
 
 	// /**
 	//  * @var string    Name of subtable class that manage subtable lines
 	//  */
-	// public $class_element_line = 'FraisproDet';
+	// public $class_element_line = 'FraisproReceiptLine';
 
 	// /**
 	//  * @var array	List of child tables. To test if we can delete object.
 	//  */
-	// protected $childtables = array('mychildtable' => array('name'=>'Fraispro', 'fk_element'=>'fk_myobject'));
+	// protected $childtables = array('mychildtable' => array('name'=>'Fraispro', 'fk_element'=>'fk_fraispro_receipt'));
 
 	// /**
 	//  * @var array    List of child tables. To know object to delete on cascade.
@@ -260,7 +260,7 @@ class FraisproReceipt extends CommonObject
 	// protected $childtablesoncascade = array('fraispro_myobjectdet');
 
 	// /**
-	//  * @var FraisproDet[]     Array of subtable lines
+	//  * @var FraisproReceiptLine[]     Array of subtable lines
 	//  */
 	// public $lines = array();
 
@@ -1125,8 +1125,8 @@ class FraisproReceipt extends CommonObject
 	{
 		$this->lines = array();
 
-		$objectline = new FraisproDet($this->db);
-		$result = $objectline->fetchAll('ASC', 'position', 0, 0, '(fk_myobject:=:'.((int) $this->id).')');
+		$objectline = new FraisproReceiptLine($this->db);
+		$result = $objectline->fetchAll('ASC', 'position', 0, 0, '(fk_fraispro_receipt:=:'.((int) $this->id).')');
 
 		if (is_numeric($result)) {
 			$this->setErrorsFromObject($objectline);
