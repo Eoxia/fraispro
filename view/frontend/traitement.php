@@ -109,6 +109,74 @@ if ($action == 'uploadPhoto' || $action == 'upload_media') {
 
 $langs->loadLangs(['fraispro@fraispro', 'projects']);
 
+$action = GETPOST('action', 'aZ09');
+$id = GETPOST('id', 'int');
+
+if ($action == 'save_traitement' && !empty($id)) {
+    require_once __DIR__ . '/../../class/fraispro_receipt.class.php';
+    $receipt = new FraisproReceipt($db);
+    if ($receipt->fetch($id) > 0) {
+        $receipt->ref = GETPOST('ref', 'alpha');
+        $receipt->date_receipt = GETPOST('date_receipt', 'alpha');
+        $receipt->description = GETPOST('description', 'none');
+        $receipt->fk_project = (GETPOST('fk_project', 'int') > 0 ? GETPOST('fk_project', 'int') : 0);
+        $receipt->fk_c_type_fees = (GETPOST('fk_c_type_fees', 'int') > 0 ? GETPOST('fk_c_type_fees', 'int') : 0);
+        
+        $receipt->total_ht = (float)price2num(GETPOST('total_ht', 'alpha'));
+        $receipt->total_tva = (float)price2num(GETPOST('total_tva', 'alpha'));
+        $receipt->total_ttc = (float)price2num(GETPOST('total_ttc', 'alpha'));
+        
+        $resUpdate = $receipt->update($user);
+        if ($resUpdate < 0) {
+            if (GETPOST('ajax', 'int')) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'error' => $receipt->error]);
+                exit;
+            }
+            setEventMessages($receipt->error, $receipt->errors, 'errors');
+        }
+        
+        // Save lines (basic mock for now)
+        // We delete old lines and recreate them
+        $db->query("DELETE FROM " . MAIN_DB_PREFIX . "fraispro_receipt_det WHERE fk_fraispro_receipt = " . (int)$id);
+        
+        $lines_tva = GETPOST('lines_tva', 'array');
+        $lines_pu_ht = GETPOST('lines_pu_ht', 'array');
+        $lines_pu_ttc = GETPOST('lines_pu_ttc', 'array');
+        $lines_qty = GETPOST('lines_qty', 'array');
+        $lines_ht = GETPOST('lines_ht', 'array');
+        $lines_ttc = GETPOST('lines_ttc', 'array');
+        
+        if (is_array($lines_tva)) {
+            $lineObj = new FraisproReceiptLine($db);
+            foreach ($lines_tva as $k => $tva) {
+                // skip hidden template
+                if ($k === 0 && empty($lines_pu_ht[$k]) && empty($lines_ttc[$k])) continue;
+                
+                $lineObj->fk_fraispro_receipt = $id;
+                $lineObj->description = '';
+                $lineObj->qty = (int)($lines_qty[$k] ?? 1);
+                $lineObj->pu_ht = (float)($lines_pu_ht[$k] ?? 0);
+                $lineObj->pu_ttc = (float)($lines_pu_ttc[$k] ?? 0);
+                $lineObj->total_ht = (float)($lines_ht[$k] ?? 0);
+                $lineObj->total_ttc = (float)($lines_ttc[$k] ?? 0);
+                $lineObj->tva_tx = (float)$tva;
+                $lineObj->insert();
+            }
+        }
+        
+        if (GETPOST('ajax', 'int')) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true]);
+            exit;
+        }
+        
+        setEventMessages("Brouillon sauvegardé.", null, 'mesgs');
+        header("Location: ?action=edit&id=" . $id);
+        exit;
+    }
+}
+
 $title = 'Brouillons Frais.pro';
 $help_url = '';
 
@@ -131,6 +199,11 @@ $pwaHeaderCenterHtml = '<span style="font-weight:600;">Traitement</span>';
 $fraispro_header = dol_buildpath('/custom/fraispro/view/frontend/fraispro_pwa_header.tpl.php');
 if (file_exists($fraispro_header)) {
     require_once $fraispro_header;
+}
+
+if ($action == 'edit' && !empty($id)) {
+    require_once __DIR__ . '/traitement_edit.php';
+    exit;
 }
 
 print '<div class="pwa-container" style="padding: 10px; max-width: 1000px; margin: 0 auto;">';
@@ -195,7 +268,7 @@ if ($resql) {
             
             print '  <div class="draft-actions">';
             // Add a simple circular button to view/edit (icon only)
-            print '    <a href="#" class="button" style="padding: 0 !important; width: 36px !important; height: 36px !important; min-width: 36px !important; border-radius: 50% !important; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin: 0;"><i class="fa fa-pen"></i></a>';
+            print '    <a href="?action=edit&id=' . $obj->rowid . '" class="button" style="padding: 0 !important; width: 36px !important; height: 36px !important; min-width: 36px !important; border-radius: 50% !important; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin: 0;"><i class="fa fa-pen"></i></a>';
             print '  </div>';
             print '</div>';
         }

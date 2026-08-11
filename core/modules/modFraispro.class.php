@@ -338,6 +338,83 @@ class modFraispro extends DolibarrModules
 		/* END MODULEBUILDER TOPMENU */
 
 		/* BEGIN MODULEBUILDER LEFTMENU Fraispro */
+
+		/* BEGIN MODULEBUILDER LEFTMENU Reçu/Facture */
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro',
+			'type' => 'left',
+			'titre' => 'Reçu/Facture',
+			'prefix' => img_picto('', 'fraispro@fraispro', 'class="pictofixedwidth valignmiddle paddingright"'),
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_receipt',
+			'url' => '/fraispro/fraisproreceipt_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_receipt',
+			'type' => 'left',
+			'titre' => 'New',
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_receipt_new',
+			'url' => '/fraispro/fraisproreceipt_card.php?action=create',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_receipt',
+			'type' => 'left',
+			'titre' => 'List',
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_receipt_list',
+			'url' => '/fraispro/fraisproreceipt_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+		/* END MODULEBUILDER LEFTMENU Reçu/Facture */
+
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro',
+			'type' => 'left',
+			'titre' => 'LignesNoteDeFrais',
+			'prefix' => img_picto('', 'fraispro@fraispro', 'class="pictofixedwidth valignmiddle paddingright"'),
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_lignesnotedefrais',
+			'url' => '/fraispro/fraisprodet_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_lignesnotedefrais',
+			'type' => 'left',
+			'titre' => 'ListLignesNoteDeFrais',
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_lignesnotedefrais_list',
+			'url' => '/fraispro/fraisprodet_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+
 		$this->menu[$r++] = array(
 			'fk_menu' => 'fk_mainmenu=fraispro',
 			'type' => 'left',
@@ -385,36 +462,6 @@ class modFraispro extends DolibarrModules
 		$this->menu[$r++] = array(
 			'fk_menu' => 'fk_mainmenu=fraispro',
 			'type' => 'left',
-			'titre' => 'LignesNoteDeFrais',
-			'prefix' => img_picto('', 'fraispro@fraispro', 'class="pictofixedwidth valignmiddle paddingright"'),
-			'mainmenu' => 'fraispro',
-			'leftmenu' => 'fraispro_lignesnotedefrais',
-			'url' => '/fraispro/fraisprodet_list.php',
-			'langs' => 'fraispro@fraispro',
-			'position' => 1000 + $r,
-			'enabled' => 'isModEnabled("fraispro")',
-			'perms' => '1',
-			'target' => '',
-			'user' => 2,
-		);
-		$this->menu[$r++] = array(
-			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_lignesnotedefrais',
-			'type' => 'left',
-			'titre' => 'ListLignesNoteDeFrais',
-			'mainmenu' => 'fraispro',
-			'leftmenu' => 'fraispro_lignesnotedefrais_list',
-			'url' => '/fraispro/fraisprodet_list.php',
-			'langs' => 'fraispro@fraispro',
-			'position' => 1000 + $r,
-			'enabled' => 'isModEnabled("fraispro")',
-			'perms' => '1',
-			'target' => '',
-			'user' => 2,
-		);
-
-		$this->menu[$r++] = array(
-			'fk_menu' => 'fk_mainmenu=fraispro',
-			'type' => 'left',
 			'titre' => 'Setup',
 			'prefix' => img_picto('', 'setup', 'class="pictofixedwidth valignmiddle paddingright"'),
 			'mainmenu' => 'fraispro',
@@ -427,6 +474,7 @@ class modFraispro extends DolibarrModules
 			'target' => '',
 			'user' => 0,
 		);
+		
 		$this->menu[$r++] = array(
 			'fk_menu' => 'fk_mainmenu=fraispro',
 			'type' => 'left',

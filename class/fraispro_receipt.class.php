@@ -126,6 +126,11 @@ class FraisproReceipt extends CommonObject
 		'rowid' => array('type' => 'integer', 'label' => 'TechnicalID', 'enabled' => 1, 'position' => 1, 'notnull' => 1, 'visible' => 0, 'noteditable' => 1, 'index' => 1, 'css' => 'left', 'comment' => 'Id', 'lang' => 'fraispro@fraispro'),
 		'ref' => array('type' => 'varchar(128)', 'label' => 'Ref', 'enabled' => 1, 'position' => 10, 'notnull' => 1, 'visible' => 1, 'index' => 1, 'searchall' => 1, 'showoncombobox' => 1, 'validate' => 1, 'default' => '(PROV)', 'comment' => 'Reference', 'lang' => 'fraispro@fraispro'),
 		'fk_expensereport' => array('type' => 'integer:ExpenseReport:expensereport/class/expensereport.class.php', 'label' => 'ExpenseReport', 'enabled' => 1, 'position' => 20, 'notnull' => -1, 'visible' => 1, 'index' => 1, 'lang' => 'fraispro@fraispro'),
+		'fk_facture_fourn' => array('type' => 'integer:FactureFournisseur:fourn/class/fournisseur.facture.class.php', 'label' => 'SupplierInvoice', 'enabled' => 1, 'position' => 21, 'notnull' => -1, 'visible' => 1, 'index' => 1, 'lang' => 'fraispro@fraispro'),
+		'date_receipt' => array('type' => 'date', 'label' => 'Date', 'enabled' => 1, 'position' => 25, 'notnull' => -1, 'visible' => 1, 'lang' => 'fraispro@fraispro'),
+		'total_ht' => array('type' => 'double(24,8)', 'label' => 'TotalHT', 'enabled' => 1, 'position' => 26, 'notnull' => 1, 'default' => 0, 'visible' => 1, 'lang' => 'fraispro@fraispro'),
+		'total_tva' => array('type' => 'double(24,8)', 'label' => 'TotalTVA', 'enabled' => 1, 'position' => 27, 'notnull' => 1, 'default' => 0, 'visible' => 1, 'lang' => 'fraispro@fraispro'),
+		'total_ttc' => array('type' => 'double(24,8)', 'label' => 'TotalTTC', 'enabled' => 1, 'position' => 28, 'notnull' => 1, 'default' => 0, 'visible' => 1, 'lang' => 'fraispro@fraispro'),
 		'sha' => array('type' => 'varchar(255)', 'label' => 'SHA', 'enabled' => 1, 'position' => 30, 'notnull' => -1, 'visible' => 0, 'lang' => 'fraispro@fraispro'),
 		'date_creation' => array('type' => 'datetime', 'label' => 'DateCreation', 'enabled' => 1, 'position' => 500, 'notnull' => 1, 'visible' => -2, 'lang' => 'fraispro@fraispro'),
 		'tms' => array('type' => 'timestamp', 'label' => 'DateModification', 'enabled' => 1, 'position' => 501, 'notnull' => 0, 'visible' => -2, 'lang' => 'fraispro@fraispro'),
@@ -134,12 +139,38 @@ class FraisproReceipt extends CommonObject
 		'status' => array('type' => 'integer', 'label' => 'Status', 'enabled' => 1, 'position' => 2000, 'notnull' => 1, 'visible' => 1, 'index' => 1, 'arrayofkeyval' => array(0 => 'Draft', '1' => 'Validated', 9 => 'Canceled'), 'validate' => 1, 'lang' => 'fraispro@fraispro'),
 		'description' => array('type' => 'text', 'label' => 'Description', 'enabled' => 1, 'position' => 40, 'notnull' => -1, 'visible' => 1, 'lang' => 'fraispro@fraispro'),
 		'fk_project' => array('type' => 'integer:Project:projet/class/project.class.php', 'label' => 'Project', 'enabled' => 1, 'position' => 50, 'notnull' => -1, 'visible' => 1, 'lang' => 'fraispro@fraispro'),
+		'fk_c_type_fees' => array('type' => 'integer', 'label' => 'Type', 'enabled' => 1, 'position' => 55, 'notnull' => -1, 'visible' => 1),
 	);
 
 	/**
 	 * @var int ID
 	 */
 	public $rowid;
+
+	/**
+	 * @var int fk_facture_fourn
+	 */
+	public $fk_facture_fourn;
+	
+	/**
+	 * @var int date_receipt
+	 */
+	public $date_receipt;
+	
+	/**
+	 * @var float total_ht
+	 */
+	public $total_ht;
+	
+	/**
+	 * @var float total_tva
+	 */
+	public $total_tva;
+	
+	/**
+	 * @var float total_ttc
+	 */
+	public $total_ttc;
 	
 	/**
 	 * @var string Description
@@ -150,6 +181,11 @@ class FraisproReceipt extends CommonObject
 	 * @var int fk_project
 	 */
 	public $fk_project;
+
+	/**
+	 * @var int fk_c_type_fees
+	 */
+	public $fk_c_type_fees;
 
 	/**
 	 * @var string Ref
@@ -1250,44 +1286,71 @@ class FraisproReceipt extends CommonObject
 require_once DOL_DOCUMENT_ROOT.'/core/class/commonobjectline.class.php';
 
 /**
- * Class FraisproDet. You can also remove this and generate a CRUD class for lines objects.
+ * Class FraisproReceiptLine
  */
-class FraisproDet extends CommonObjectLine
+class FraisproReceiptLine extends CommonObjectLine
 {
-	// To complete with content of an object FraisproDet
-	// We should have a field rowid, fk_myobject and position
-
-	/**
-	 * To overload
-	 * @see CommonObjectLine
-	 */
-	public $parent_element = '';		// Example: '' or 'Fraispro'
-
-	/**
-	 * To overload
-	 * @see CommonObjectLine
-	 */
-	public $fk_parent_attribute = '';	// Example: '' or 'fk_myobject'
-
-	/**
-	 * @var int<0,1>	Does object support extrafields ? 0=No, 1=Yes
-	 */
-	public $isextrafieldmanaged = 0;
-
-	/**
-	 * @var int<0,1>|string|null  	Does this object support multicompany module ?
-	 * 								0=No test on entity, 1=Test with field entity in local table, 'field@table'=Test entity into the field@table (example 'fk_soc@societe')
-	 */
-	public $ismultientitymanaged = 0;
-
-
-	/**
-	 * Constructor
-	 *
-	 * @param	DoliDB $db Database handler
-	 */
+	public $table_element = 'fraispro_receipt_det';
+	public $element = 'fraispro_receipt_line';
+	public $parent_element = 'fraispro_receipt';
+	public $fk_parent_attribute = 'fk_fraispro_receipt';
+	
+	public $rowid;
+	public $fk_fraispro_receipt;
+	public $fk_product;
+	public $ref;
+	public $label;
+	public $fk_c_type_fees;
+	public $description;
+	public $qty;
+	public $pu_ht;
+	public $pu_ttc;
+	public $subprice;
+	public $subprice_ttc;
+	public $tva_tx;
+	public $total_ht;
+	public $total_tva;
+	public $total_ttc;
+	
 	public function __construct(DoliDB $db)
 	{
 		$this->db = $db;
+	}
+	
+	public function fetch($id)
+	{
+		$sql = "SELECT * FROM ".MAIN_DB_PREFIX.$this->table_element." WHERE rowid = ".(int) $id;
+		$resql = $this->db->query($sql);
+		if ($resql) {
+			$obj = $this->db->fetch_object($resql);
+			if ($obj) {
+				foreach ($obj as $key => $val) {
+					$this->$key = $val;
+				}
+				return 1;
+			}
+		}
+		return -1;
+	}
+	
+	public function insert()
+	{
+		// Basic insert for now
+		$sql = "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element." (fk_fraispro_receipt, fk_c_type_fees, description, qty, pu_ht, pu_ttc, tva_tx, total_ht, total_tva, total_ttc)";
+		$sql .= " VALUES (".(int)$this->fk_fraispro_receipt.", ".(int)$this->fk_c_type_fees.", '".$this->db->escape($this->description)."', ".(float)$this->qty.", ".(float)$this->pu_ht.", ".(float)$this->pu_ttc.", ".(float)$this->tva_tx.", ".(float)$this->total_ht.", ".(float)$this->total_tva.", ".(float)$this->total_ttc.")";
+		$resql = $this->db->query($sql);
+		if ($resql) {
+			$this->rowid = $this->db->last_insert_id(MAIN_DB_PREFIX.$this->table_element);
+			return $this->rowid;
+		}
+		$this->error = $this->db->lasterror();
+		return -1;
+	}
+	
+	public function delete($user = null)
+	{
+		$sql = "DELETE FROM ".MAIN_DB_PREFIX.$this->table_element." WHERE rowid = ".(int)$this->rowid;
+		if ($this->db->query($sql)) return 1;
+		return -1;
 	}
 }
