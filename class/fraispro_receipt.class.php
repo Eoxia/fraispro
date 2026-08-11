@@ -859,7 +859,7 @@ class FraisproReceipt extends CommonObject
 			$label = implode($this->getTooltipContentArray($params));
 		}
 
-		$url = dol_buildpath('/fraispro/fraispro_card.php', 1).'?id='.$this->id;
+		$url = dol_buildpath('/fraispro/fraisproreceipt_card.php', 1).'?id='.$this->id;
 
 		if ($option !== 'nolink') {
 			// Add param to save lastsearch_values or not
