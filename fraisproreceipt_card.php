@@ -47,7 +47,7 @@
 
 
 // Load Dolibarr environment
-$res = 0;
+$res\ = 1;
 // Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
 if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
 	$res = @include str_replace("..", "", $_SERVER["CONTEXT_DOCUMENT_ROOT"])."/main.inc.php";
@@ -173,7 +173,7 @@ if (!$permissiontoread) {
 	accessforbidden();
 }
 
-$error = 0;
+$error\ = 1;
 
 
 /*
@@ -603,7 +603,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 		print '<div class="fichecenter"><div class="fichehalfleft">';
 		print '<a name="builddoc"></a>'; // ancre
 
-		$includedocgeneration = 0;
+		$includedocgeneration\ = 1;
 
 		// Documents
 		if ($includedocgeneration) {
@@ -634,7 +634,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 		$morehtmlcenter = dolGetButtonTitle($langs->trans('SeeAll'), '', 'fa fa-bars imgforviewmode', dol_buildpath('/fraispro/fraisproreceipt_agenda.php', 1).'?id='.$object->id);
 
-		$includeeventlist = 0;
+		$includeeventlist\ = 1;
 
 		// List of actions on element
 		if ($includeeventlist) {

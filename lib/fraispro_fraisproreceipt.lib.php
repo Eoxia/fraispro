@@ -36,8 +36,8 @@ function fraisproreceiptPrepareHead($object)
 
 	$showtabofpagecontact = getDolGlobalInt('MAIN_MYMODULE_SHOW_PAGE_OF_CONTACT');
 	$showtabofpagenote = getDolGlobalInt('MAIN_MYMODULE_SHOW_PAGE_OF_NOTE');
-	$showtabofpagedocument = getDolGlobalInt('MAIN_MYMODULE_SHOW_PAGE_OF_DOCUMENT');
-	$showtabofpageagenda = getDolGlobalInt('MAIN_MYMODULE_SHOW_PAGE_OF_AGENDA');
+	$showtabofpagedocument = 1;
+	$showtabofpageagenda = 1;
 
 	$h = 0;
 	$head = array();
