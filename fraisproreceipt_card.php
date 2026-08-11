@@ -173,7 +173,7 @@ if (!$permissiontoread) {
 	accessforbidden();
 }
 
-$error\ = 1;
+$error = 0;
 
 
 /*
@@ -603,7 +603,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 		print '<div class="fichecenter"><div class="fichehalfleft">';
 		print '<a name="builddoc"></a>'; // ancre
 
-		$includedocgeneration\ = 1;
+		$includedocgeneration = 0;
 
 		// Documents
 		if ($includedocgeneration) {
@@ -634,7 +634,7 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 		$morehtmlcenter = dolGetButtonTitle($langs->trans('SeeAll'), '', 'fa fa-bars imgforviewmode', dol_buildpath('/fraispro/fraisproreceipt_agenda.php', 1).'?id='.$object->id);
 
-		$includeeventlist\ = 1;
+		$includeeventlist = 0;
 
 		// List of actions on element
 		if ($includeeventlist) {
