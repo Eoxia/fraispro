@@ -1232,6 +1232,64 @@ class FraisproReceipt extends CommonObject
 		return $result;
 	}
 
+	public function addline($qty = 1, $pu_ttc = 0, $fk_c_type_fees = 0, $vatrate = 0, $date = '', $comments = '', $fk_project = 0)
+	{
+		global $user;
+		$line = new FraisproReceiptLine($this->db);
+		$line->fk_fraispro_receipt = $this->id;
+		$line->qty = $qty;
+		$line->pu_ttc = $pu_ttc;
+        if ($vatrate > 0) {
+            $line->subprice = $pu_ttc / (1 + ($vatrate / 100)); // calcul HT
+        } else {
+            $line->subprice = $pu_ttc;
+        }
+        $line->pu_ht = $line->subprice;
+        $line->total_ht = $line->pu_ht * $qty;
+        $line->total_ttc = $line->pu_ttc * $qty;
+        $line->total_tva = $line->total_ttc - $line->total_ht;
+		$line->fk_c_type_fees = $fk_c_type_fees;
+		$line->tva_tx = $vatrate;
+		$line->date = $date;
+		$line->comments = $comments;
+		$line->fk_projet = $fk_project;
+		$res = $line->insert($user);
+		if ($res > 0) {
+			$this->update_price(1, 'auto');
+		}
+		return $res;
+	}
+
+    public function update_price($id = 0, $ignore_num = 'auto')
+    {
+        global $user, $langs, $conf;
+        $id = $id ? $id : $this->id;
+        if (!$id) return -1;
+        
+        $total_ht = 0;
+        $total_tva = 0;
+        $total_ttc = 0;
+
+        $this->fetchLines();
+        
+        if (is_array($this->lines)) {
+            foreach ($this->lines as $line) {
+                $total_ht += $line->total_ht;
+                $total_tva += $line->total_tva;
+                $total_ttc += $line->total_ttc;
+            }
+        }
+
+        $this->total_ht = $total_ht;
+        $this->total_tva = $total_tva;
+        $this->total_ttc = $total_ttc;
+        
+        $sql = 'UPDATE ' . MAIN_DB_PREFIX . 'fraispro_receipt SET total_ht = ' . $total_ht . ', total_tva = ' . $total_tva . ', total_ttc = ' . $total_ttc . ' WHERE rowid = ' . $id;
+        $this->db->query($sql);
+        
+        return 1;
+    }
+
 	/**
 	 * Return validation test result for a field.
 	 * Need MAIN_ACTIVATE_VALIDATION_RESULT to be called.
@@ -1333,11 +1391,13 @@ class FraisproReceiptLine extends CommonObjectLine
 		return -1;
 	}
 	
-	public function insert()
+	public function insert($user = null)
 	{
 		// Basic insert for now
-		$sql = "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element." (fk_fraispro_receipt, fk_c_type_fees, description, qty, pu_ht, pu_ttc, tva_tx, total_ht, total_tva, total_ttc)";
-		$sql .= " VALUES (".(int)$this->fk_fraispro_receipt.", ".(int)$this->fk_c_type_fees.", '".$this->db->escape($this->description)."', ".(float)$this->qty.", ".(float)$this->pu_ht.", ".(float)$this->pu_ttc.", ".(float)$this->tva_tx.", ".(float)$this->total_ht.", ".(float)$this->total_tva.", ".(float)$this->total_ttc.")";
+		$sql = "INSERT INTO ".MAIN_DB_PREFIX.$this->table_element." (fk_fraispro_receipt, fk_c_type_fees, comments, date, qty, pu_ht, pu_ttc, subprice, tva_tx, total_ht, total_tva, total_ttc)";
+		$sql .= " VALUES (".(int)$this->fk_fraispro_receipt.", ".(int)$this->fk_c_type_fees.", '".$this->db->escape($this->comments)."', ".($this->date ? "'".$this->db->idate($this->date)."'" : "NULL").", ".(float)$this->qty.", ".(float)$this->pu_ht.", ".(float)$this->pu_ttc.", ".(float)$this->subprice.", ".(float)$this->tva_tx.", ".(float)$this->total_ht.", ".(float)$this->total_tva.", ".(float)$this->total_ttc.")";
+		
+		dol_syslog(get_class($this)."::insert sql=".$sql, LOG_DEBUG);
 		$resql = $this->db->query($sql);
 		if ($resql) {
 			$this->rowid = $this->db->last_insert_id(MAIN_DB_PREFIX.$this->table_element);

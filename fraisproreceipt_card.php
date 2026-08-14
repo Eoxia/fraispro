@@ -202,6 +202,42 @@ if (empty($reshook)) {
 	$triggermodname = $object->TRIGGER_PREFIX.'_MODIFY'; // Name of trigger action code to execute when we modify record. Used in actions_addupdatedelete.inc.php
 
 	// Actions cancel, add, update, update_extras, confirm_validate, confirm_delete, confirm_deleteline, confirm_clone, confirm_close, confirm_setdraft, confirm_reopen
+
+    // Addline intercept
+	if ($action == 'addline') {
+		$error = 0;
+		$fk_c_type_fees = GETPOSTINT('fk_c_type_fees');
+		$date = GETPOST('date', 'alpha');
+		$comments = GETPOST('comments', 'restricthtml');
+		$vatrate = GETPOST('tva_tx', 'alpha');
+		$pu_ttc = GETPOST('pu_ttc', 'alpha');
+		$qty = GETPOST('qty', 'alpha');
+		if (empty($qty)) $qty = 1;
+		if (empty($fk_c_type_fees) || $fk_c_type_fees <= 0) {
+			setEventMessages($langs->trans("ErrorFieldRequired", $langs->transnoentitiesnoconv("Type")), null, 'errors');
+			$error++;
+			$action = 'create';
+		}
+		if (!$error) {
+			$res = $object->addline($qty, $pu_ttc, $fk_c_type_fees, $vatrate, $date, $comments, 0);
+			if ($res > 0) {
+				header("Location: " . $_SERVER["PHP_SELF"] . "?id=" . $object->id);
+				exit;
+			} else {
+				setEventMessages($object->error, $object->errors, 'errors');
+			}
+		}
+	}
+	
+	// Deleteline intercept
+	if ($action == 'confirm_deleteline' && $confirm == 'yes') {
+		if ($object->deleteLine($user, $lineid) > 0) {
+			$object->update_price(0, 'auto');
+			header("Location: " . $_SERVER["PHP_SELF"] . "?id=" . $object->id);
+			exit;
+		}
+	}
+
 	include DOL_DOCUMENT_ROOT.'/core/actions_addupdatedelete.inc.php';
 
 	// Actions when linking object each other
@@ -477,49 +513,117 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 		// Show object lines
 		$result = $object->getLinesArray();
 
-		print '	<form name="addproduct" id="addproduct" action="'.$_SERVER["PHP_SELF"].'?id='.$object->id.(($action != 'editline') ? '' : '#line_'.GETPOSTINT('lineid')).'" method="POST">
-		<input type="hidden" name="token" value="' . newToken().'">
-		<input type="hidden" name="action" value="' . (($action != 'editline') ? 'addline' : 'updateline').'">
-		<input type="hidden" name="mode" value="">
-		<input type="hidden" name="page_y" value="">
-		<input type="hidden" name="id" value="' . $object->id.'">
-		';
-
-		if (!empty($conf->use_javascript_ajax) && $object->status == 0) {
-			include DOL_DOCUMENT_ROOT.'/core/tpl/ajaxrow.tpl.php';
-		}
-
-		print '<div class="div-table-responsive-no-min">';
-		if (!empty($object->lines) || ($object->status == $object::STATUS_DRAFT && $permissiontoadd && $action != 'selectlines' && $action != 'editline')) {
-			print '<table id="tablelines" class="noborder noshadow" width="100%">';
-		}
-
 		if (!empty($object->lines)) {
-			$object->printObjectLines($action, $mysoc, null, GETPOSTINT('lineid'), 1);
-		}
-
-		// Form to add new line
-		if ($object->status == 0 && $permissiontoadd && $action != 'selectlines') {
-			if ($action != 'editline') {
-				// Add products/services form
-
-				$parameters = array();
-				$reshook = $hookmanager->executeHooks('formAddObjectLine', $parameters, $object, $action); // Note that $action and $object may have been modified by hook
-				if ($reshook < 0) {
-					setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
+			print '<table id="tablelines" class="noborder noshadow" width="100%">';
+			print '<tr class="liste_titre">';
+			print '<td>'.$langs->trans("Date").'</td>';
+			print '<td>'.$langs->trans("Type").'</td>';
+			print '<td>'.$langs->trans("Description").'</td>';
+			print '<td class="right">'.$langs->trans("VATRate").'</td>';
+			print '<td class="right">'.$langs->trans("AmountHT").'</td>';
+			print '<td class="right">'.$langs->trans("AmountTTC").'</td>';
+			print '<td class="right">'.$langs->trans("Qty").'</td>';
+			print '<td class="center"></td>';
+			print '</tr>';
+			
+			foreach ($object->lines as $line) {
+				print '<tr class="oddeven">';
+				print '<td>'.dol_print_date($line->date, 'day').'</td>';
+				
+				// Fetch fee type label
+				require_once DOL_DOCUMENT_ROOT.'/core/class/html.formexpensereport.class.php';
+				$formexpensereport = new FormExpenseReport($db);
+				$sql = "SELECT label FROM ".MAIN_DB_PREFIX."c_type_fees WHERE id = ".$line->fk_c_type_fees;
+				$resql = $db->query($sql);
+				$type_label = '';
+				if ($resql && $db->num_rows($resql) > 0) {
+					$objtype = $db->fetch_object($resql);
+					$type_label = $objtype->label;
 				}
-				if (empty($reshook)) {
-					$object->formAddObjectLine(1, $mysoc, $soc);
+				print '<td>'.(($type_label != '') ? $langs->trans($type_label) : $type_label).'</td>';
+				print '<td>'.$line->comments.'</td>';
+				print '<td class="right">'.vatrate($line->tva_tx, 1).'</td>';
+				print '<td class="right">'.price($line->total_ht).'</td>';
+				print '<td class="right">'.price($line->total_ttc).'</td>';
+				print '<td class="right">'.$line->qty.'</td>';
+				
+				// Delete button
+				print '<td class="center">';
+				if ($permissiontoadd && $object->status == $object::STATUS_DRAFT) {
+					print '<a href="'.$_SERVER["PHP_SELF"].'?id='.$object->id.'&action=confirm_deleteline&confirm=yes&token='.newToken().'&lineid='.$line->id.'">'.img_delete().'</a>';
 				}
+				print '</td>';
+				
+				print '</tr>';
 			}
+			print '</table><br>';
 		}
 
-		if (!empty($object->lines) || ($object->status == $object::STATUS_DRAFT && $permissiontoadd && $action != 'selectlines' && $action != 'editline')) {
+		if ($object->status == 0 && $permissiontoadd && $action != 'selectlines' && $action != 'editline') {
+			require_once DOL_DOCUMENT_ROOT.'/core/class/html.formexpensereport.class.php';
+			$formexpensereport = new FormExpenseReport($db);
+			
+			print '<form name="addline" id="addline" action="'.$_SERVER["PHP_SELF"].'?id='.$object->id.'" method="POST">';
+			print '<input type="hidden" name="token" value="'.newToken().'">';
+			print '<input type="hidden" name="action" value="addline">';
+			
+			print '<div class="div-table-responsive-no-min">';
+			print '<table class="noborder noshadow" width="100%">';
+			print '<tr class="liste_titre">';
+			print '<td>'.$langs->trans("Date").'</td>';
+			print '<td>'.$langs->trans("Type").'</td>';
+			print '<td>'.$langs->trans("Description").'</td>';
+			print '<td class="right">'.$langs->trans("VATRate").'</td>';
+			print '<td class="right">'.$langs->trans("AmountHT").'</td>';
+			print '<td class="right">'.$langs->trans("AmountTTC").'</td>';
+			print '<td class="right">'.$langs->trans("Qty").'</td>';
+			print '<td class="center"></td>';
+			print '</tr>';
+			
+			print '<tr class="oddeven">';
+			print '<td>';
+			print $form->selectDate('', 'date', '', '', 1, "addline");
+			print '</td>';
+			print '<td>';
+			print $formexpensereport->selectTypeExpenseReport('', 'fk_c_type_fees', 1);
+			print '</td>';
+			print '<td><input type="text" class="flat minwidth200" name="comments" value=""></td>';
+			print '<td class="right">';
+			print $form->load_tva('tva_tx', '', $mysoc, null, 0, 0, '', false, 1);
+			print '</td>';
+			print '<td class="right"><input type="text" class="flat width75 right" id="pu_ht" name="pu_ht" value=""></td>';
+			print '<td class="right"><input type="text" class="flat width75 right" id="pu_ttc" name="pu_ttc" value=""></td>';
+			print '<td class="right"><input type="text" class="flat width50 right" id="qty" name="qty" value="1"></td>';
+			print '<td class="center"><input type="submit" class="button button-add" value="'.$langs->trans("Add").'"></td>';
+			print '</tr>';
 			print '</table>';
+			print '</div>';
+			print '</form>';
+			
+			print '<script type="text/javascript">
+				jQuery(document).ready(function() {
+					jQuery("#pu_ht").on("keyup", function() {
+						var ht = parseFloat(jQuery(this).val().replace(",", "."));
+						var tva_tx = parseFloat(jQuery("#tva_tx").val());
+						if (!isNaN(ht) && !isNaN(tva_tx)) {
+							var ttc = ht * (1 + (tva_tx / 100));
+							jQuery("#pu_ttc").val(ttc.toFixed(2));
+						}
+					});
+					jQuery("#pu_ttc").on("keyup", function() {
+						var ttc = parseFloat(jQuery(this).val().replace(",", "."));
+						var tva_tx = parseFloat(jQuery("#tva_tx").val());
+						if (!isNaN(ttc) && !isNaN(tva_tx)) {
+							var ht = ttc / (1 + (tva_tx / 100));
+							jQuery("#pu_ht").val(ht.toFixed(2));
+						}
+					});
+					jQuery("#tva_tx").on("change", function() {
+						jQuery("#pu_ttc").trigger("keyup");
+					});
+				});
+			</script>';
 		}
-		print '</div>';
-
-		print "</form>\n";
 	}
 
 
