@@ -239,7 +239,7 @@ class FraisproReceipt extends CommonObject
 	// /**
 	//  * @var string    Field name with ID of parent key if this object has a parent, Or Field name of in child tables to link to this record.
 	//  */
-	// public $fk_element = 'fk_fraispro_receipt';
+	public $fk_element = 'fk_fraispro_receipt';
 
 	// /**
 	//  * @var string    Name of subtable class that manage subtable lines
