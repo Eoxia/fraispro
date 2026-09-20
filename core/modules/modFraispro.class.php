@@ -146,7 +146,7 @@ class modFraispro extends DolibarrModules
 		// A condition to hide module
 		$this->hidden = getDolGlobalInt('MODULE_FRAISPRO_DISABLED'); // A condition to disable module;
 		// List of module class names that must be enabled if this module is enabled. Example: array('always'=>array('modModuleToEnable1','modModuleToEnable2'), 'FR'=>array('modModuleToEnableFR')...)
-		$this->depends = array();
+		$this->depends = array('always' => array('modExpenseReport'));
 		// List of module class names to disable if this one is disabled. Example: array('modModuleToDisable1', ...)
 		$this->requiredby = array();
 		// List of module class names this module is in conflict with. Example: array('modModuleToDisable1', ...)
@@ -436,7 +436,7 @@ class modFraispro extends DolibarrModules
 			'titre' => 'NewNoteDeFrais',
 			'mainmenu' => 'fraispro',
 			'leftmenu' => 'fraispro_notedefrais_new',
-			'url' => '/expensereport/card.php?action=create&leftmenu=expensereport&mainmenu=hrm',
+			'url' => '/fraispro/expensereport_create.php',
 			'langs' => 'fraispro@fraispro',
 			'position' => 1000 + $r,
 			'enabled' => 'isModEnabled("fraispro")',
@@ -451,6 +451,20 @@ class modFraispro extends DolibarrModules
 			'mainmenu' => 'fraispro',
 			'leftmenu' => 'fraispro_notedefrais_list',
 			'url' => '/fraispro/fraispro_list.php',
+			'langs' => 'fraispro@fraispro',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("fraispro")',
+			'perms' => '1',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=fraispro,fk_leftmenu=fraispro_notedefrais',
+			'type' => 'left',
+			'titre' => 'FraisproAnnualGenerator',
+			'mainmenu' => 'fraispro',
+			'leftmenu' => 'fraispro_notedefrais_annual',
+			'url' => '/fraispro/annual_generator.php',
 			'langs' => 'fraispro@fraispro',
 			'position' => 1000 + $r,
 			'enabled' => 'isModEnabled("fraispro")',
@@ -573,6 +587,12 @@ class modFraispro extends DolibarrModules
 	public function init($options = '')
 	{
 		global $conf, $langs;
+
+		// Force activation of the core expense report module
+		if (empty($conf->expensereport->enabled)) {
+			require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
+			activateModule('modExpenseReport');
+		}
 
 		// Create tables of module at module activation
 		// Disabled: no custom tables needed for now, using native Dolibarr expense report tables

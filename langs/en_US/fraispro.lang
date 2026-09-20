@@ -76,3 +76,5 @@ FraisproConfigureDefaultProductToBill = You must configure the %sdefault product
 
 FraisproReceipt = Receipt / Invoice
 FraisproReceipts = Receipts / Invoices
+
+FraisproErrorExpenseReportMustBeEnabledByAdmin = The expense report module must be enabled by an administrator
