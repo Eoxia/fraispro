@@ -50,4 +50,8 @@ FraisproDescOptionDescription = Description uniquement
 FraisproDescOptionRefAndId = Référence et ID de la ligne
 FraisproConfigureDefaultProductToBill = Il faut configurer le %sproduit/service par défaut%s pour la facturation
 
+FraisproErrorExpenseReportMustBeEnabledByAdmin = Le module de note de frais doit être activé par un administrateur
 
+FraisproAnnualGenerator = Génération annuelle
+FraisproGenerateYearlyBtn = Générer les 12 notes de frais pour l'année en cours
+FraisproGenerateYearlySuccess = %s notes de frais ont été créées avec succès en brouillon.
