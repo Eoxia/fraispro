@@ -42,6 +42,22 @@ require_once DOL_DOCUMENT_ROOT . '/custom/fraispro/class/fraispro_receipt.class.
 global $conf, $db, $langs, $user;
 
 $action = GETPOST('action', 'alpha');
+$id = GETPOST('id', 'int');
+
+if ($action == 'delete' && !empty($id)) {
+    $receipt = new FraisproReceipt($db);
+    if ($receipt->fetch($id) > 0) {
+        $deletedRef = !empty($receipt->ref) ? $receipt->ref : '(PROV' . $receipt->rowid . ')';
+        $res = $receipt->delete($user);
+        if ($res > 0) {
+            setEventMessages("Le reçu " . $deletedRef . " a été supprimé.", null, 'mesgs');
+        } else {
+            setEventMessages($receipt->error, $receipt->errors, 'errors');
+        }
+    }
+    header("Location: ?");
+    exit;
+}
 
 if ($action == 'uploadPhoto' || $action == 'upload_media') {
     $subDir = GETPOST('sub_dir', 'alpha');
@@ -269,6 +285,7 @@ if ($resql) {
             print '  <div class="draft-actions">';
             // Add a simple circular button to view/edit (icon only)
             print '    <a href="?action=edit&id=' . $obj->rowid . '" class="button" style="padding: 0 !important; width: 36px !important; height: 36px !important; min-width: 36px !important; border-radius: 50% !important; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin: 0;"><i class="fa fa-pen"></i></a>';
+            print '    <a href="?action=delete&id=' . $obj->rowid . '&token=' . newToken() . '" class="button" style="padding: 0 !important; width: 36px !important; height: 36px !important; min-width: 36px !important; border-radius: 50% !important; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin: 0 0 0 5px; background: #ef4444; border-color: #ef4444; color: white;"><i class="fa fa-trash"></i></a>';
             print '  </div>';
             print '</div>';
         }

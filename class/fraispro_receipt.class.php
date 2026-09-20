@@ -1260,10 +1260,10 @@ class FraisproReceipt extends CommonObject
 		return $res;
 	}
 
-    public function update_price($id = 0, $ignore_num = 'auto')
+    public function update_price($exclspec = 0, $roundingadjust = 'auto', $nodatabaseupdate = 0, $seller = null)
     {
         global $user, $langs, $conf;
-        $id = $id ? $id : $this->id;
+        $id = $this->id;
         if (!$id) return -1;
         
         $total_ht = 0;
