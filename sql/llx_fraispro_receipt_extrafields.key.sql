@@ -1,0 +1,1 @@
+ALTER TABLE llx_fraispro_receipt_extrafields ADD INDEX idx_fraispro_receipt_extrafields (fk_object);

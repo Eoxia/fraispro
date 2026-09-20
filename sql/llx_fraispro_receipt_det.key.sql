@@ -1,0 +1,2 @@
+ALTER TABLE llx_fraispro_receipt_det ADD INDEX idx_fraispro_receipt_det_fk_expensereport (fk_expensereport);
+ALTER TABLE llx_fraispro_receipt_det ADD INDEX idx_fraispro_receipt_det_fk_c_type_fees (fk_c_type_fees);

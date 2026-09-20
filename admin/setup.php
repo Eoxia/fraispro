@@ -134,10 +134,10 @@ $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 
 $moduledir = 'fraispro';
 $myTmpObjects = array();
-// TODO Scan list of objects to fill this array
-$myTmpObjects['Fraispro'] = array('label' => 'Fraispro', 'includerefgeneration' => 0, 'includedocgeneration' => 0, 'class' => 'Fraispro');
+$myTmpObjects['FraisproReceipt'] = array('label' => 'FraisproReceipt', 'includerefgeneration' => 1, 'includedocgeneration' => 0, 'class' => 'FraisproReceipt');
 
 $tmpobjectkey = GETPOST('object', 'aZ09');
+if ($tmpobjectkey == 'fraisproreceipt') $tmpobjectkey = 'FraisproReceipt'; // Fix case issue from strtolower in links
 if ($tmpobjectkey && !array_key_exists($tmpobjectkey, $myTmpObjects)) {
 	accessforbidden('Bad value for object. Hack attempt ?');
 }
@@ -337,7 +337,9 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 							}
 
 							if ($module->isEnabled()) {
-								dol_include_once('/'.$moduledir.'/class/'.strtolower($myTmpObjectKey).'.class.php');
+								$classname_for_include = strtolower($myTmpObjectKey);
+								if ($classname_for_include == 'fraisproreceipt') $classname_for_include = 'fraispro_receipt';
+								dol_include_once('/'.$moduledir.'/class/'.$classname_for_include.'.class.php');
 
 								print '<tr class="oddeven"><td>'.$module->getName($langs)."</td><td>\n";
 								print $module->info($langs);

@@ -74,4 +74,7 @@ FraisproDescOptionRefAndId = Line reference and ID
 FraisproConfigureDefaultProductToBill = You must configure the %sdefault product/service%s for invoicing
 
 
+FraisproReceipt = Receipt / Invoice
+FraisproReceipts = Receipts / Invoices
+
 FraisproErrorExpenseReportMustBeEnabledByAdmin = The expense report module must be enabled by an administrator

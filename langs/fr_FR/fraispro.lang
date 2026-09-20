@@ -52,6 +52,9 @@ FraisproConfigureDefaultProductToBill = Il faut configurer le %sproduit/service 
 
 FraisproErrorExpenseReportMustBeEnabledByAdmin = Le module de note de frais doit être activé par un administrateur
 
+FraisproReceipt = Reçu / Facture
+FraisproReceipts = Reçus / Factures
+
 FraisproAnnualGenerator = Génération annuelle
 FraisproGenerateYearlyBtn = Générer les 12 notes de frais pour l'année en cours
 FraisproGenerateYearlySuccess = %s notes de frais ont été créées avec succès en brouillon.
