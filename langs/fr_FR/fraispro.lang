@@ -55,3 +55,10 @@ FraisproErrorExpenseReportMustBeEnabledByAdmin = Le module de note de frais doit
 FraisproAnnualGenerator = Génération annuelle
 FraisproGenerateYearlyBtn = Générer les 12 notes de frais pour l'année en cours
 FraisproGenerateYearlySuccess = %s notes de frais ont été créées avec succès en brouillon.
+
+FraisproEmployeeList = Liste des salariés
+FraisproLastNDFDate = Date de fin de la dernière note de frais
+FraisproNDFToGenerate = Nombre de notes de frais à générer jusqu'à la fin de l'année
+FraisproGenerateAction = Générer
+FraisproMissingNDFGenerated = %s notes de frais ont été créées avec succès pour cet utilisateur.
+FraisproNoNDFToGenerate = Toutes les notes de frais sont déjà générées pour cette année.
