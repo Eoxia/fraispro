@@ -594,13 +594,13 @@ class modFraispro extends DolibarrModules
 			activateModule('modExpenseReport');
 		}
 
-		// Create tables of module at module activation
-		// Disabled: no custom tables needed for now, using native Dolibarr expense report tables
-		//$result = $this->_load_tables('/install/mysql/', 'fraispro');
-		//$result = $this->_load_tables('/fraispro/sql/');
-		//if ($result < 0) {
-		//	return -1; // Do not activate module if error 'not allowed' returned when loading module SQL queries (the _load_table run sql with run_sql with the error allowed parameter set to 'default')
-		//}
+		// Create tables of module at module activation.
+		// Also migrates existing databases: run_sql() tolerates 'table/column already exists',
+		// so the ALTER TABLE statements of sql/ are safe to replay on every activation.
+		$result = $this->_load_tables('/fraispro/sql/');
+		if ($result < 0) {
+			return -1; // Do not activate module if error 'not allowed' returned when loading module SQL queries (the _load_table run sql with run_sql with the error allowed parameter set to 'default')
+		}
 
 		// Create extrafields during init
 		//include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
