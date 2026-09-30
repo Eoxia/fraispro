@@ -1,0 +1,1267 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: admin/about.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: admin/fraispro_extrafields.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: admin/setup.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: admin/setup.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: ajax/fraispro.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: ajax/fraispro_invoice.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 6
+			path: ajax/fraispro_invoice.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: alter_db.php
+
+		-
+			message: '#^Parameter \#1 \$year of function dol_get_last_day expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: annual_generator.php
+
+		-
+			message: '#^Parameter \#6 \$year of function dol_mktime expects int, string given\.$#'
+			identifier: argument.type
+			count: 5
+			path: annual_generator.php
+
+		-
+			message: '#^Path in include\(\) "\.\./\.\./\.\./\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: annual_generator.php
+
+		-
+			message: '#^Path in include\(\) "\.\./\.\./\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: annual_generator.php
+
+		-
+			message: '#^Path in include\(\) "\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: annual_generator.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 21
+			path: annual_generator.php
+
+		-
+			message: '#^Variable \$langs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 10
+			path: annual_generator.php
+
+		-
+			message: '#^Class HookManager referenced with incorrect case\: Hookmanager\.$#'
+			identifier: class.nameCase
+			count: 1
+			path: class/actions_fraispro.class.php
+
+		-
+			message: '#^Comparison operation "\>" between 0 and 0 is always false\.$#'
+			identifier: greater.alwaysFalse
+			count: 1
+			path: class/actions_fraispro.class.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 3
+			path: class/actions_fraispro.class.php
+
+		-
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
+			count: 1
+			path: class/actions_fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$rowid on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Comparison operation "\=\=" between \*NEVER\* and \-2 results in an error\.$#'
+			identifier: equal.invalid
+			count: 1
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Comparison operation "\>" between \*NEVER\* and 0 results in an error\.$#'
+			identifier: greater.invalid
+			count: 1
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Left side of && is always false\.$#'
+			identifier: booleanAnd.leftAlwaysFalse
+			count: 3
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Loose comparison using \!\= between \*NEVER\* and ''\-1'' will always evaluate to true\.$#'
+			identifier: notEqual.alwaysTrue
+			count: 1
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Loose comparison using \=\= between \*NEVER\* and \-2 will always evaluate to false\.$#'
+			identifier: equal.alwaysFalse
+			count: 1
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: class/api_fraispro.class.php
+
+		-
+			message: '#^Call to function method_exists\(\) with \$this\(Fraispro\) and ''getLibStatut'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function method_exists\(\) with \$this\(Fraispro\) and ''getNomUrl'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(Fraispro\) and ''amount'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(Fraispro\) and ''fk_soc'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(Fraispro\) and ''label'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(Fraispro\) and ''ref'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(Fraispro\) and ''thirdparty'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with Fraispro and ''date_creation'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with Fraispro and ''date_modification'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with Fraispro and ''label'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with Fraispro and ''ref'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with Fraispro and ''status'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$datec on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$fk_user_creat on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$fk_user_modif on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$fk_user_valid on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$rowid on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Left side of && is always false\.$#'
+			identifier: booleanAnd.leftAlwaysFalse
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: class/fraispro.class.php
+
+		-
+			message: '#^Cannot access property \$linked_lines on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_link.class.php
+
+		-
+			message: '#^Cannot access property \$total_ht_linked on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_link.class.php
+
+		-
+			message: '#^Cannot access property \$total_ht_unlinked on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_link.class.php
+
+		-
+			message: '#^Cannot access property \$total_lines on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_link.class.php
+
+		-
+			message: '#^Cannot access property \$unlinked_lines on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_link.class.php
+
+		-
+			message: '#^Call to function method_exists\(\) with \$this\(FraisproReceipt\) and ''getLibStatut'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function method_exists\(\) with \$this\(FraisproReceipt\) and ''getNomUrl'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(FraisproReceipt\) and ''ref'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with \$this\(FraisproReceipt\) and ''thirdparty'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with FraisproReceipt and ''date_creation'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with FraisproReceipt and ''date_modification'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with FraisproReceipt and ''ref'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Call to function property_exists\(\) with FraisproReceipt and ''status'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Cannot access property \$datec on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Cannot access property \$fk_user_creat on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Cannot access property \$fk_user_modif on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Cannot access property \$fk_user_valid on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Cannot access property \$rowid on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Left side of && is always false\.$#'
+			identifier: booleanAnd.leftAlwaysFalse
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$comments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$date with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$fk_c_type_fees with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$fk_project with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$pu_ttc with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$qty with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceipt\:\:addline\(\) has parameter \$vatrate with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceiptLine\:\:delete\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceiptLine\:\:delete\(\) has parameter \$user with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceiptLine\:\:fetch\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceiptLine\:\:fetch\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceiptLine\:\:insert\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Method FraisproReceiptLine\:\:insert\(\) has parameter \$user with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceipt\:\:\$class_element_line has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceipt\:\:\$fields \(array\<string, array\{type\: string, label\: string, langfile\?\: string, enabled\: int\<0, 2\>\|string, position\: int, notnull\?\: int, visible\: int\<\-6, 6\>\|string, alwayseditable\?\: int\<0, 1\>\|string, \.\.\.\}\>\) does not accept default value of type array\{rowid\: array\{type\: ''integer'', label\: ''TechnicalID'', enabled\: 1, position\: 1, notnull\: 1, visible\: 0, noteditable\: 1, index\: 1, \.\.\.\}, ref\: array\{type\: ''varchar\(128\)'', label\: ''Ref'', enabled\: 1, position\: 10, notnull\: 1, visible\: 1, index\: 1, searchall\: 1, \.\.\.\}, fk_expensereport\: array\{type\: ''integer…'', label\: ''ExpenseReport'', enabled\: 1, position\: 20, notnull\: \-1, visible\: 1, index\: 1, lang\: ''fraispro@fraispro''\}, fk_facture_fourn\: array\{type\: ''integer…'', label\: ''SupplierInvoice'', enabled\: 1, position\: 21, notnull\: \-1, visible\: 1, index\: 1, lang\: ''fraispro@fraispro''\}, date_receipt\: array\{type\: ''date'', label\: ''Date'', enabled\: 1, position\: 25, notnull\: \-1, visible\: 1, lang\: ''fraispro@fraispro''\}, total_ht\: array\{type\: ''double\(24,8\)'', label\: ''TotalHT'', enabled\: 1, position\: 26, notnull\: 1, default\: 0, visible\: 1, lang\: ''fraispro@fraispro''\}, total_tva\: array\{type\: ''double\(24,8\)'', label\: ''TotalTVA'', enabled\: 1, position\: 27, notnull\: 1, default\: 0, visible\: 1, lang\: ''fraispro@fraispro''\}, total_ttc\: array\{type\: ''double\(24,8\)'', label\: ''TotalTTC'', enabled\: 1, position\: 28, notnull\: 1, default\: 0, visible\: 1, lang\: ''fraispro@fraispro''\}, \.\.\.\}\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceiptLine\:\:\$fk_c_type_fees has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceiptLine\:\:\$fk_fraispro_receipt has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceiptLine\:\:\$label has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceiptLine\:\:\$pu_ht has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Property FraisproReceiptLine\:\:\$pu_ttc has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: class/fraispro_receipt.class.php
+
+		-
+			message: '#^Parameter \#3 \$encode of method Segment\:\:setVars\(\) expects string, true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: core/modules/fraispro/doc/doc_generic_fraispro_odt.modules.php
+
+		-
+			message: '#^$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to function is_object\(\) with object will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method AddPage\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 6
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method AliasNbPages\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method Close\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method GetStringWidth\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 2
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method GetY\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 8
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method MultiCell\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 2
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method Open\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method Output\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method Rect\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 5
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetAuthor\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetCompression\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetCreator\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetDrawColor\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 3
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetFont\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 8
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetKeyWords\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetLineStyle\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 2
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetMargins\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetSubject\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetTextColor\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 3
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetTitle\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method SetXY\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method commitTransaction\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 2
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method getPage\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 8
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method importPage\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method line\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 2
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method rollbackTransaction\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 3
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setAutoPageBreak\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setPage\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 11
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setPageOrientation\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 8
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setPrintFooter\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setPrintHeader\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setSignature\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setSourceFile\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method setTopMargin\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 4
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method startTransaction\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 3
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method useTemplate\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 7
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Call to method writeHTMLCell\(\) on an unknown class TCPDI\.$#'
+			identifier: class.notFound
+			count: 2
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Cannot call method get_prev_progress\(\) on CommonObject\|stdClass\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Parameter \#1 \$object of function pdf_getlineqty expects Asset\|Commande\|CommandeFournisseur\|Delivery\|Facture\|FactureFournisseur\|MyObject\|Propal\|StockTransfer\|SupplierProposal, Fraispro given\.$#'
+			identifier: argument.type
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Parameter \$pdf of method pdf_standard_fraispro\:\:_pagefoot\(\) has invalid type TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Parameter \$pdf of method pdf_standard_fraispro\:\:_pagehead\(\) has invalid type TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Parameter \$pdf of method pdf_standard_fraispro\:\:_tableau\(\) has invalid type TCPDI\.$#'
+			identifier: class.notFound
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 0, width\: false, status\: true, title\: array\{textkey\: ''Designation'', align\: ''L'', padding\: array\{0\.5, 0\.5, 0\.5, 0\.5\}\}, content\: array\{align\: ''L'', padding\: array\{1, 0\.5, 1, 1\.5\}\}\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 10, status\: false, width\: 16, title\: array\{textkey\: ''VAT''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 10, status\: true, width\: 16, title\: array\{textkey\: ''VAT''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 1050, width\: 26, status\: true, title\: array\{textkey\: ''TotalHTShort''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 20, width\: 19, status\: true, title\: array\{textkey\: ''PriceUHT''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 30, width\: 16, status\: true, title\: array\{textkey\: ''Qty''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 40, width\: 11, status\: false, title\: array\{textkey\: ''Unit''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 40, width\: 11, status\: true, title\: array\{textkey\: ''Unit''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 50, width\: 13, status\: false, title\: array\{textkey\: ''ReductionShort''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Property pdf_standard_fraispro\:\:\$cols \(array\<string, array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\) does not accept non\-empty\-array\<string, array\{rank\: 50, width\: 13, status\: true, title\: array\{textkey\: ''ReductionShort''\}, border\-left\: true\}\|array\{rank\: int, width\: float\|false, status\: bool\|int\<0, 1\>, border\-left\?\: bool, title\: array\{textkey\: string, label\?\: string, align\?\: string, padding\?\: array\{float, float, float, float\}\}, content\?\: array\{align\?\: string, padding\?\: array\{float, float, float, float\}\}\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/fraispro/doc/pdf_standard_fraispro.modules.php
+
+		-
+			message: '#^Cannot access property \$email on object\|false\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: core/modules/mailings/mailing_fraispro_selector1.modules.php
+
+		-
+			message: '#^Cannot access property \$firstname on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: core/modules/mailings/mailing_fraispro_selector1.modules.php
+
+		-
+			message: '#^Cannot access property \$id on object\|false\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: core/modules/mailings/mailing_fraispro_selector1.modules.php
+
+		-
+			message: '#^Cannot access property \$lastname on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: core/modules/mailings/mailing_fraispro_selector1.modules.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 1
+			path: core/modules/modFraispro.class.php
+
+		-
+			message: '#^Property DolibarrModules\:\:\$menu \(1\|array\<array\{commentgroup\?\: string, mainmenu\: string, leftmenu\: string, langs\: string, enabled\: int\|string, target\: string, titre\: string, user\: int, \.\.\.\}\>\) does not accept non\-empty\-array\<array\{commentgroup\?\: string, mainmenu\: string, leftmenu\: string, langs\: string, enabled\: int\|string, target\: string, titre\: string, user\: int, \.\.\.\}\|array\{fk_menu\: '''', type\: ''top'', titre\: ''ModuleFraisproName'', prefix\: string, mainmenu\: ''fraispro'', leftmenu\: '''', url\: ''/fraispro…'', langs\: ''fraispro@fraispro'', \.\.\.\}\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: core/modules/modFraispro.class.php
+
+		-
+			message: '#^Path in include\(\) "\.\./\.\./\.\./\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: expensereport_create.php
+
+		-
+			message: '#^Path in include\(\) "\.\./\.\./\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: expensereport_create.php
+
+		-
+			message: '#^Path in include\(\) "\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: expensereport_create.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: expensereport_create.php
+
+		-
+			message: '#^Variable \$langs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: expensereport_create.php
+
+		-
+			message: '#^Call to function is_numeric\(\) with 0 will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: fraispro_agenda.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraispro_agenda.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 2
+			path: fraispro_card.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraispro_card.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraispro_contact.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraispro_document.php
+
+		-
+			message: '#^Variable \$upload_dir might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: fraispro_document.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraispro_list.php
+
+		-
+			message: '#^Variable \$conf might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: fraispro_list.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 25
+			path: fraispro_list.php
+
+		-
+			message: '#^Variable \$langs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 18
+			path: fraispro_list.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraispro_note.php
+
+		-
+			message: '#^Binary operation "\*" between float and string results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Binary operation "\+\=" between float and string results in an error\.$#'
+			identifier: assignOp.invalid
+			count: 1
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Parameter \#2 \$expdet_id of static method FraisproLink\:\:linkToInvoiceLine\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Variable \$conf might not be defined\.$#'
+			identifier: variable.undefined
+			count: 10
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 55
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Variable \$langs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 62
+			path: fraisprodet_list.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproindex.php
+
+		-
+			message: '#^Call to function is_numeric\(\) with 0 will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: fraisproreceipt_agenda.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproreceipt_agenda.php
+
+		-
+			message: '#^Parameter \#1 \$string of function urlencode expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisproreceipt_agenda.php
+
+		-
+			message: '#^Cannot access property \$label on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 2
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^Parameter \#1 \$selected of method FormExpenseReport\:\:selectTypeExpenseReport\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^Parameter \#2 \$addpercent of function vatrate expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^Parameter \#3 \$h of method Form\:\:selectDate\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^Parameter \#4 \$m of method Form\:\:selectDate\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisproreceipt_card.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproreceipt_contact.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproreceipt_document.php
+
+		-
+			message: '#^Cannot access property \$nbtotalofrecords on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: fraisproreceipt_list.php
+
+		-
+			message: '#^Cannot access property \$rowid on object\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: fraisproreceipt_list.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproreceipt_list.php
+
+		-
+			message: '#^Offset ''helplist'' does not exist on array\{type\: string, label\: string, langfile\?\: string, enabled\: int\<0, 2\>\|string, position\: int, notnull\?\: int, visible\: int\<\-6, 6\>\|string, alwayseditable\?\: int\<0, 1\>\|string, \.\.\.\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: fraisproreceipt_list.php
+
+		-
+			message: '#^Parameter \#3 \$selected of method Form\:\:multiselectarray\(\) expects array\<string\>, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: fraisproreceipt_list.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\{type\: string, label\: string, langfile\?\: string, enabled\: int\<0, 2\>\|string, position\: int, notnull\?\: int, visible\: int\<\-6, 6\>\|string, alwayseditable\?\: int\<0, 1\>\|string, \.\.\.\} and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: fraisproreceipt_list.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: fraisproreceipt_note.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 4
+			path: lib/fraispro_fraispro.lib.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 2
+			path: lib/fraispro_fraisproreceipt.lib.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 2
+			path: scripts/fraispro.php
+
+		-
+			message: '#^Path in include\(\) "\.\./\.\./\.\./\.\./\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: scripts/process_photos.php
+
+		-
+			message: '#^Path in include\(\) "\.\./\.\./\.\./\.\./main\.inc\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: scripts/process_photos.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: scripts/process_photos.php
+
+		-
+			message: '#^Variable \$langs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: scripts/process_photos.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: view/frontend/app.php
+
+		-
+			message: '#^Parameter \#1 \$id of method FraisproReceipt\:\:fetch\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: view/frontend/app.php
+
+		-
+			message: '#^Property FraisproReceipt\:\:\$fk_project \(int\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: view/frontend/app.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: view/frontend/traitement.php
+
+		-
+			message: '#^Parameter \#1 \$id of method FraisproReceipt\:\:fetch\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: view/frontend/traitement.php
+
+		-
+			message: '#^Property FraisproReceipt\:\:\$date_receipt \(int\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: view/frontend/traitement.php
+
+		-
+			message: '#^Parameter \#1 \$selected of method Form\:\:select_type_fees\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: view/frontend/traitement_edit.php
+
+		-
+			message: '#^Variable \$conf might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: view/frontend/traitement_edit.php
+
+		-
+			message: '#^Variable \$db might not be defined\.$#'
+			identifier: variable.undefined
+			count: 6
+			path: view/frontend/traitement_edit.php
+
+		-
+			message: '#^Variable \$id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: view/frontend/traitement_edit.php
+
+		-
+			message: '#^Variable \$langs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: view/frontend/traitement_edit.php
