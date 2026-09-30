@@ -2,6 +2,13 @@
 ModuleFraisproName = Fraispro
 ModuleFraisproDesc = Gestion et refacturation avancée des notes de frais. Permet de lier chaque ligne de frais à une facture client, d'appliquer des marges personnalisées et de suivre les marges en temps réel.
 
+# Admin page
+FraisproSetup = Configuration de Fraispro
+FraisproSetupPage = Page de configuration de Fraispro
+
+# Index page
+FraisproArea = Accueil Fraispro
+
 # Menus
 NoteDeFrais = Notes de frais
 NewNoteDeFrais = Nouveau

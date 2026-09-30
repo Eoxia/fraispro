@@ -22,3 +22,5 @@
 /.gitattributes
 
 scratch/
+# PHPStan cache
+/.github/tmp/phpstan
