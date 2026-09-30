@@ -37,7 +37,7 @@ if (!$res) {
 }
 
 require_once DOL_DOCUMENT_ROOT . '/core/class/html.form.class.php';
-require_once DOL_DOCUMENT_ROOT . '/custom/fraispro/class/fraispro_receipt.class.php';
+dol_include_once('/fraispro/class/fraispro_receipt.class.php');
 if (isModEnabled('project')) {
     require_once DOL_DOCUMENT_ROOT . '/core/class/html.formprojet.class.php';
 }
@@ -306,7 +306,7 @@ $help_url = '';
 $conf->dol_hide_topmenu  = 1;
 $conf->dol_hide_leftmenu = 1;
 
-require_once DOL_DOCUMENT_ROOT . '/custom/saturne/lib/saturne_functions.lib.php';
+dol_include_once('/saturne/lib/saturne_functions.lib.php');
 global $moduleNameLowerCase;
 $moduleNameLowerCase = 'fraispro';
 
@@ -314,7 +314,7 @@ saturne_header(1, '', $title, $help_url, '', 0, 0, [], [], '', 'template-pwa fra
 
 // Include Homogeneous App Top Header
 $pwaHeaderCenterHtml = '<span style="font-weight:600;">Frais.pro</span>';
-$fraispro_header = dol_buildpath('/custom/fraispro/view/frontend/fraispro_pwa_header.tpl.php');
+$fraispro_header = dol_buildpath('/fraispro/view/frontend/fraispro_pwa_header.tpl.php');
 if (file_exists($fraispro_header)) {
     require_once $fraispro_header;
 }
@@ -322,7 +322,7 @@ if (file_exists($fraispro_header)) {
 print '<div class="pwa-container" style="padding: 10px; max-width: 1000px; margin: 0 auto;">';
 
 // --- TOP SECTION: QUICK UPLOAD ---
-require_once DOL_DOCUMENT_ROOT . '/custom/saturne/lib/medias.lib.php';
+dol_include_once('/saturne/lib/medias.lib.php');
 
 print '<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding: 10px 0;">';
 print '<div id="saturne-fast-capture" style="display:flex; gap:10px;">';
@@ -404,7 +404,7 @@ if ($resql) {
         print '<div class="fraispro-feed-list" style="display: flex; flex-direction: column; gap: 20px;">';
         
         require_once DOL_DOCUMENT_ROOT . '/core/lib/files.lib.php';
-        require_once DOL_DOCUMENT_ROOT . '/custom/saturne/lib/medias.lib.php';
+        dol_include_once('/saturne/lib/medias.lib.php');
         
         $form = new Form($db);
         if (isModEnabled('project')) {
@@ -526,13 +526,13 @@ if ($resql) {
 print '</div>'; // end pwa-container
 
 // Include Homogeneous App Bottom Nav
-$fraispro_bottom_nav = dol_buildpath('/custom/fraispro/view/frontend/fraispro_pwa_bottom_nav.tpl.php');
+$fraispro_bottom_nav = dol_buildpath('/fraispro/view/frontend/fraispro_pwa_bottom_nav.tpl.php');
 if (file_exists($fraispro_bottom_nav)) {
     require_once $fraispro_bottom_nav;
 }
 
 // Include Saturne Photo Editor Modal (Required for photo uploads / pdf attachments / audio)
-$saturne_photo_tpl = DOL_DOCUMENT_ROOT . '/custom/saturne/core/tpl/medias/photo_editor_modal.tpl.php';
+$saturne_photo_tpl = dol_buildpath('/saturne/core/tpl/medias/photo_editor_modal.tpl.php', 0);
 if (file_exists($saturne_photo_tpl)) {
     include $saturne_photo_tpl;
 }

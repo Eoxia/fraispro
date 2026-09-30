@@ -50,11 +50,11 @@ $dolibarrUrl = !empty($landingPage) ? dol_buildpath($landingPage, 1) : DOL_URL_R
 </style>
 
 <nav class="fraispro-bottom-nav">
-    <a href="<?php echo dol_buildpath('/custom/fraispro/view/frontend/app.php', 1); ?>" class="fraispro-nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'app.php' ? 'active' : ''); ?>">
+    <a href="<?php echo dol_buildpath('/fraispro/view/frontend/app.php', 1); ?>" class="fraispro-nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'app.php' ? 'active' : ''); ?>">
         <i class="fas fa-camera"></i>
         <span>Scan Reçu</span>
     </a>
-    <a href="<?php echo dol_buildpath('/custom/fraispro/view/frontend/traitement.php', 1); ?>" class="fraispro-nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'traitement.php' ? 'active' : ''); ?>">
+    <a href="<?php echo dol_buildpath('/fraispro/view/frontend/traitement.php', 1); ?>" class="fraispro-nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'traitement.php' ? 'active' : ''); ?>">
         <i class="fas fa-list"></i>
         <span>Traitement</span>
     </a>

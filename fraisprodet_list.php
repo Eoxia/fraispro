@@ -813,7 +813,7 @@ print '  window.fraispro.link.selectInvoiceLabel = "'.dol_escape_js($langs->tran
 print '  window.fraispro.link.selectLineLabel = "'.dol_escape_js($langs->transnoentitiesnoconv("SelectInvoiceLine")).'";';
 print '  window.fraispro.link.modalTitle = "'.dol_escape_js($langs->transnoentitiesnoconv("LinkToInvoiceLine")).'";';
 print '  window.fraispro.link.unlinkConfirmLabel = "'.dol_escape_js($langs->transnoentitiesnoconv("ConfirmUnlink")).'";';
-print '  window.fraispro.link.ajaxUrl = "'.dol_escape_js(DOL_URL_ROOT . '/custom/fraispro/ajax/fraispro_invoice.php').'";';
+print '  window.fraispro.link.ajaxUrl = "'.dol_escape_js(dol_buildpath('/fraispro/ajax/fraispro_invoice.php', 1)).'";';
 print '  window.fraispro.link.token = "'.dol_escape_js(newToken()).'";';
 print '</script>';
 

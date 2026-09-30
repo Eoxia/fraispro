@@ -22,7 +22,7 @@
  *    \brief      File of class to manage FraisproReceipt numbering rules Standard
  */
 
-require_once DOL_DOCUMENT_ROOT.'/custom/fraispro/core/modules/fraispro/modules_fraispro.php';
+dol_include_once('/fraispro/core/modules/fraispro/modules_fraispro.php');
 
 /**
  *  Class to manage FraisproReceipt numbering rules Standard
