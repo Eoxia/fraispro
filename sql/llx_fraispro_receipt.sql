@@ -17,5 +17,11 @@ CREATE TABLE llx_fraispro_receipt
    total_ttc double(24,8) DEFAULT 0 NOT NULL,
    sha varchar(255),
    description text,
-   fk_project integer
+   fk_project integer,
+   fk_c_type_fees integer
 ) ENGINE=innodb;
+
+-- Columns added after the first release: databases created before them are migrated here.
+ALTER TABLE llx_fraispro_receipt ADD COLUMN description text;
+ALTER TABLE llx_fraispro_receipt ADD COLUMN fk_project integer;
+ALTER TABLE llx_fraispro_receipt ADD COLUMN fk_c_type_fees integer;

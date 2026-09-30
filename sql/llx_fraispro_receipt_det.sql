@@ -18,7 +18,7 @@ CREATE TABLE llx_fraispro_receipt_det
    pu_ttc double(24,8) DEFAULT 0, 								-- unit price with tax (Facture)
    subprice double(24,8) DEFAULT 0 NOT NULL, 					-- unit price HT (NDF)
    subprice_ttc double(24,8) DEFAULT 0,    	     				-- unit price if price was entered including tax (NDF)
-   value_unit double(24,8) NOT NULL,          					-- P.U. TTC (NDF)
+   value_unit double(24,8) DEFAULT 0 NOT NULL,         					-- P.U. TTC (NDF)
    remise_percent real DEFAULT 0,
    fk_remise_except integer NULL,
    vat_src_code varchar(10) DEFAULT '',
@@ -53,3 +53,6 @@ CREATE TABLE llx_fraispro_receipt_det
    rule_warning_message text,
    extraparams varchar(255)
 ) ENGINE=innodb;
+
+-- value_unit is not written by FraisproReceiptLine::insert(): without a default, a strict sql_mode rejects every line.
+ALTER TABLE llx_fraispro_receipt_det MODIFY COLUMN value_unit double(24,8) DEFAULT 0 NOT NULL;
