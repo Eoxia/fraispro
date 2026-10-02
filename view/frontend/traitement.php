@@ -37,7 +37,7 @@ if (!$res) {
 }
 
 require_once DOL_DOCUMENT_ROOT . '/core/class/html.form.class.php';
-require_once DOL_DOCUMENT_ROOT . '/custom/fraispro/class/fraispro_receipt.class.php';
+dol_include_once('/fraispro/class/fraispro_receipt.class.php');
 
 global $conf, $db, $langs, $user;
 
@@ -198,11 +198,11 @@ $help_url = '';
 
 // Include Saturne libs
 $moreJS   = [
-    '/custom/saturne/js/saturne.min.js',
-    '/custom/saturne/js/includes/hammer.min.js'
+    '/saturne/js/saturne.min.js',
+    '/saturne/js/includes/hammer.min.js'
 ];
 $moreCSS  = [
-    '/custom/saturne/css/saturne.min.css'
+    '/saturne/css/saturne.min.css'
 ];
 
 $conf->dol_hide_topmenu  = 1;
@@ -212,7 +212,7 @@ llxHeader('', $title, $help_url, '', 0, 0, $moreJS, $moreCSS, '', 'template-pwa 
 
 // Include Homogeneous App Top Header
 $pwaHeaderCenterHtml = '<span style="font-weight:600;">Traitement</span>';
-$fraispro_header = dol_buildpath('/custom/fraispro/view/frontend/fraispro_pwa_header.tpl.php');
+$fraispro_header = dol_buildpath('/fraispro/view/frontend/fraispro_pwa_header.tpl.php');
 if (file_exists($fraispro_header)) {
     require_once $fraispro_header;
 }
@@ -304,7 +304,7 @@ if ($resql) {
 print '</div>'; // end pwa-container
 
 // Include Homogeneous App Bottom Nav
-$fraispro_bottom_nav = dol_buildpath('/custom/fraispro/view/frontend/fraispro_pwa_bottom_nav.tpl.php');
+$fraispro_bottom_nav = dol_buildpath('/fraispro/view/frontend/fraispro_pwa_bottom_nav.tpl.php');
 if (file_exists($fraispro_bottom_nav)) {
     require_once $fraispro_bottom_nav;
 }

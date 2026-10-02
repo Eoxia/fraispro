@@ -22,7 +22,7 @@
  * \brief      File that contains the numbering module rules Advanced
  */
 
-require_once DOL_DOCUMENT_ROOT.'/custom/fraispro/core/modules/fraispro/modules_fraispro.php';
+dol_include_once('/fraispro/core/modules/fraispro/modules_fraispro.php');
 
 /**
  * Class of file that contains the numbering module rules Advanced
@@ -112,7 +112,7 @@ class mod_fraisproreceipt_advanced extends ModeleNumRefFraispro
 	{
 		global $db, $langs;
 
-		require_once DOL_DOCUMENT_ROOT . '/custom/fraispro/class/fraispro_receipt.class.php';
+		dol_include_once('/fraispro/class/fraispro_receipt.class.php');
 
 		$obj = new FraisproReceipt($db);
 		$obj->initAsSpecimen();
